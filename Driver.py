@@ -3,18 +3,18 @@ from antlr4 import *
 from antlr4.error.ErrorListener import ErrorListener
 from LittleLexer import LittleLexer
 from LittleParser import LittleParser
-from io import StringIO
+from LittleListenerImpl import LittleListenerImpl
 
-class MyErrorListener(ErrorListener):
+class CustomErrorListener(ErrorListener):
 
     def __init__(self):
-        self.output = StringIO()
+        self.errors = []
 
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
-        self.output.write("line " + str(line) + ":" + str(column) + " " + msg)
+        self.errors.append("line " + str(line) + ":" + str(column) + " " + msg)
 
-    def print(self):
-        print(self.output.getvalue())
+    def has_errors(self):
+        return len(self.errors) > 0
 
 
 if __name__ == '__main__':
@@ -25,12 +25,11 @@ if __name__ == '__main__':
     token_stream = CommonTokenStream(lexer)
     parser = LittleParser(token_stream)
     parser.removeErrorListeners()
-    listener = MyErrorListener()
-    parser.addErrorListener(listener)
 
-    program = parser.program()
-    if program.exception is not None:
-        print("Not accepted")
-        listener.print()
-    else:
-        print("Accepted")
+    errorListener = CustomErrorListener()
+    parser.addErrorListener(errorListener)
+
+    tree = parser.program()
+    walker = ParseTreeWalker()
+    listener = LittleListenerImpl()
+    walker.walk(listener, tree)

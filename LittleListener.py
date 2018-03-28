@@ -224,42 +224,6 @@ class LittleListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LittleParser#expr_prefix.
-    def enterExpr_prefix(self, ctx:LittleParser.Expr_prefixContext):
-        pass
-
-    # Exit a parse tree produced by LittleParser#expr_prefix.
-    def exitExpr_prefix(self, ctx:LittleParser.Expr_prefixContext):
-        pass
-
-
-    # Enter a parse tree produced by LittleParser#factor.
-    def enterFactor(self, ctx:LittleParser.FactorContext):
-        pass
-
-    # Exit a parse tree produced by LittleParser#factor.
-    def exitFactor(self, ctx:LittleParser.FactorContext):
-        pass
-
-
-    # Enter a parse tree produced by LittleParser#factor_prefix.
-    def enterFactor_prefix(self, ctx:LittleParser.Factor_prefixContext):
-        pass
-
-    # Exit a parse tree produced by LittleParser#factor_prefix.
-    def exitFactor_prefix(self, ctx:LittleParser.Factor_prefixContext):
-        pass
-
-
-    # Enter a parse tree produced by LittleParser#postfix_expr.
-    def enterPostfix_expr(self, ctx:LittleParser.Postfix_exprContext):
-        pass
-
-    # Exit a parse tree produced by LittleParser#postfix_expr.
-    def exitPostfix_expr(self, ctx:LittleParser.Postfix_exprContext):
-        pass
-
-
     # Enter a parse tree produced by LittleParser#call_expr.
     def enterCall_expr(self, ctx:LittleParser.Call_exprContext):
         pass

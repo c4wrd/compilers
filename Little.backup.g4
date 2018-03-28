@@ -38,19 +38,7 @@ write_stmt : WRITE '(' id_list ')' ';' ;
 return_stmt : RETURN expr ';' ;
 
 // Expressions
-
-expr
-    : expr addop expr
-    | expr mulop expr
-    | IDENTIFIER
-    | INTLITERAL
-    | FLOATLITERAL
-    | '(' expr ')'
-    | call_expr
-;
-
-
-/*expr : expr_prefix factor ;
+expr : expr_prefix factor ;
 expr_prefix : expr_prefix factor addop
     | // empty
     ;
@@ -59,7 +47,7 @@ factor_prefix
     : factor_prefix postfix_expr mulop
     | // empty
     ;
-postfix_expr : primary | call_expr ; */
+postfix_expr : primary | call_expr ;
 call_expr : IDENTIFIER '(' expr_list ')' ;
 expr_list : (expr expr_list_tail)? ;
 expr_list_tail : (',' expr expr_list_tail)? ;
