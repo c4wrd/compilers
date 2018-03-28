@@ -32,4 +32,9 @@ if __name__ == '__main__':
     tree = parser.program()
     walker = ParseTreeWalker()
     listener = LittleListenerImpl()
-    walker.walk(listener, tree)
+    try:
+        walker.walk(listener, tree)
+        listener.symbol_table.debug()
+    except Exception as e:
+        for arg in e.args:
+            print(arg)

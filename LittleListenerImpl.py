@@ -8,18 +8,46 @@ else:
     from LittleListener import LittleListener
 
 class SymbolTableAttribute:
+    """
+    All symbol table attributes will inherit from this class
+    and implement the debug method
+    """
+
+    def __init__(self, name):
+        self.name = name
 
     def debug(self):
         raise NotImplementedError()
 
-class Scope:
+class StringAttribute(SymbolTableAttribute):
+
+    def __init__(self, name, value):
+        super().__init__(name)
+        self.value = value
+
+    def debug(self):
+        print("name %s type STRING value %s" % (self.name, self.value))
+
+
+class FloatAttribute(SymbolTableAttribute):
+
+    def debug (self):
+        print("name %s type FLOAT" % self.name)
+
+
+class IntAttribute(SymbolTableAttribute):
+
+    def debug (self):
+        print("name %s type INT" % self.name)
+
+class Scope(SymbolTableAttribute):
 
     def __init__(self, name, parent):
-        self.name = name
+        super().__init__(name)
         self.parent = parent
-        self.children = []
         self.attributes = []
         self.records = {}
+        # self.children = [] TODO determine if we need this, they can just go in attributes (?)
 
     def enter_scope(self, name):
         """
@@ -32,17 +60,17 @@ class Scope:
         """
         scope = Scope(name, self)
         self.attributes.append(scope)
-        self.records[name] = scope
+        self.records[scope.name] = scope
         return scope
 
-    def contains(self, key):
+    def contains_attr(self, key):
         """
         Returns whether or not a specific variable has been declared
         in the current scope (without checking parent scopes)
         """
         return key in self.records
 
-    def resolve(self, key):
+    def resolve_attr(self, key):
         if key in self.records:
             return self.records[key]
         elif self.has_parent():
@@ -56,6 +84,10 @@ class Scope:
     def get_parent(self):
         return self.parent
 
+    def add_attribute(self, attr: SymbolTableAttribute):
+        self.attributes.append(attr)
+        self.records[attr.name] = attr
+
     def debug(self):
         """
         Will print current scope and iterate over the children
@@ -64,42 +96,65 @@ class Scope:
         print("Symbol table %s" % self.name)
         for attr in self.attributes:
             attr.debug()
-
+        print() # print an empty line
 
 class SymbolTable:
 
     def __init__(self):
+        self.block_id = 1
         self.global_scope = Scope("GLOBAL", None)
-        self.current_scope = self.global_scope
+        self.current_scope = self.global_scope # type Scope
+
+    def enter_scope(self, name):
+        self.current_scope = self.current_scope.enter_scope(name)
+
+    def enter_block_scope(self):
+        self.current_scope = self.current_scope.enter_scope("BLOCK %d" % self.next_block_id())
+
+    def exit_scope(self):
+        if self.current_scope.has_parent():
+            self.current_scope = self.current_scope.get_parent()
+        else:
+            raise Exception ("Cannot exit the GLOBAL scope...")
+
+    def next_block_id(self):
+        block_id = self.block_id
+        self.block_id += 1
+        return block_id
 
     def add_attribute(self, attribute: SymbolTableAttribute):
-        pass
+        if self.current_scope.contains_attr(attribute.name):
+            raise Exception("DECLARATION ERROR %s" % attribute.name)
+        else:
+            self.current_scope.add_attribute(attribute)
 
+    def debug(self, from_global=True):
+        if from_global:
+            while self.current_scope.has_parent():
+                self.exit_scope()
+        self.current_scope.debug()
 
 class LittleListenerImpl(LittleListener):
     def __init__(self):
-        self.scope_counter = 1
-
-    def next_scope_id(self):
-        scope_id = self.scope_counter
-        self.scope_counter += 1
-        return scope_id
+        self.symbol_table = SymbolTable()
 
     def enterAnonymousBlockScope(self):
-        name = "BLOCK %d" % self.next_scope_id()
-        self.enterNamedScope(name)
+        self.symbol_table.enter_block_scope()
 
     def enterNamedScope(self, name: str):
-        print("Symbol table {}".format(name))
+        self.symbol_table.enter_scope(name)
+
+    def exitScope(self):
+        self.symbol_table.exit_scope()
 
     def declareString(self, name, value):
-        print("name %s type STRING value %s" % (name, value))
+        self.symbol_table.add_attribute(StringAttribute(name, value))
 
     def declareInt(self, name):
-        print("name %s type INT" % name)
+        self.symbol_table.add_attribute(IntAttribute(name))
 
     def declareFloat(self, name):
-        print("name %s type FLOAT" % name)
+        self.symbol_table.add_attribute(FloatAttribute(name))
 
     # Enter a parse tree produced by LittleParser#program.
     def enterProgram(self, ctx: LittleParser.ProgramContext):
@@ -111,7 +166,7 @@ class LittleListenerImpl(LittleListener):
 
     # Enter a parse tree produced by LittleParser#program_body.
     def enterProgram_body(self, ctx: LittleParser.Program_bodyContext):
-        self.enterNamedScope("GLOBAL")
+        pass
 
     # Exit a parse tree produced by LittleParser#program_body.
     def exitProgram_body(self, ctx: LittleParser.Program_bodyContext):
@@ -127,7 +182,7 @@ class LittleListenerImpl(LittleListener):
 
     # Enter a parse tree produced by LittleParser#string_decl.
     def enterString_decl(self, ctx: LittleParser.String_declContext):
-        self.declareString(ctx.IDENTIFIER(), ctx.STRINGLITERAL())
+        self.declareString(ctx.IDENTIFIER().getText(), ctx.STRINGLITERAL())
 
     # Exit a parse tree produced by LittleParser#string_decl.
     def exitString_decl(self, ctx: LittleParser.String_declContext):
@@ -138,12 +193,12 @@ class LittleListenerImpl(LittleListener):
         if ctx.var_type().FLOAT() is not None:
             id_list = ctx.id_list()
             while id_list is not None and id_list.IDENTIFIER() is not None:
-                self.declareFloat(id_list.IDENTIFIER())
+                self.declareFloat(id_list.IDENTIFIER().getText())
                 id_list = id_list.id_tail()
         elif ctx.var_type().INT() is not None:
             id_list = ctx.id_list()
             while id_list is not None and id_list.IDENTIFIER() is not None:
-                self.declareInt(id_list.IDENTIFIER())
+                self.declareInt(id_list.IDENTIFIER().getText())
                 id_list = id_list.id_tail()
 
     # Exit a parse tree produced by LittleParser#var_decl.
@@ -192,7 +247,10 @@ class LittleListenerImpl(LittleListener):
 
     # Enter a parse tree produced by LittleParser#param_decl.
     def enterParam_decl(self, ctx: LittleParser.Param_declContext):
-        pass
+        if ctx.var_type().FLOAT() is not None:
+            self.declareFloat(ctx.IDENTIFIER().getText())
+        else:
+            self.declareInt(ctx.IDENTIFIER().getText())
 
     # Exit a parse tree produced by LittleParser#param_decl.
     def exitParam_decl(self, ctx: LittleParser.Param_declContext):
@@ -216,11 +274,11 @@ class LittleListenerImpl(LittleListener):
 
     # Enter a parse tree produced by LittleParser#func_decl.
     def enterFunc_decl(self, ctx: LittleParser.Func_declContext):
-        self.enterNamedScope(ctx.IDENTIFIER())
+        self.enterNamedScope(ctx.IDENTIFIER().getText())
 
     # Exit a parse tree produced by LittleParser#func_decl.
     def exitFunc_decl(self, ctx: LittleParser.Func_declContext):
-        pass
+        self.exitScope()
 
     # Enter a parse tree produced by LittleParser#func_body.
     def enterFunc_body(self, ctx: LittleParser.Func_bodyContext):
@@ -356,15 +414,17 @@ class LittleListenerImpl(LittleListener):
 
     # Exit a parse tree produced by LittleParser#if_stmt.
     def exitIf_stmt(self, ctx: LittleParser.If_stmtContext):
-        pass
+        self.exitScope()
 
     # Enter a parse tree produced by LittleParser#else_part.
     def enterElse_part(self, ctx: LittleParser.Else_partContext):
-        self.enterAnonymousBlockScope()
+        if ctx.children is not None:
+            self.enterAnonymousBlockScope()
 
     # Exit a parse tree produced by LittleParser#else_part.
     def exitElse_part(self, ctx: LittleParser.Else_partContext):
-        pass
+        if ctx.children is not None:
+            self.exitScope()
 
     # Enter a parse tree produced by LittleParser#cond.
     def enterCond(self, ctx: LittleParser.CondContext):
@@ -384,8 +444,8 @@ class LittleListenerImpl(LittleListener):
 
     # Enter a parse tree produced by LittleParser#while_stmt.
     def enterWhile_stmt(self, ctx: LittleParser.While_stmtContext):
-        pass
+        self.enterAnonymousBlockScope()
 
     # Exit a parse tree produced by LittleParser#while_stmt.
     def exitWhile_stmt(self, ctx: LittleParser.While_stmtContext):
-        pass
+        self.exitScope()
