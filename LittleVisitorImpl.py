@@ -100,7 +100,7 @@ class LittleVisitorImpl(LittleVisitor):
 
     def visitProcessAddOp(self, ctx: LittleParser.ProcessAddOpContext):
         left = self.visit(ctx.expr(0))
-        right = self.visit(ctx.expr(0))
+        right = self.visit(ctx.expr(1))
         node = AddExprNode(self.visit(ctx.addop()), left, right)
         return node
 
@@ -114,7 +114,10 @@ class LittleVisitorImpl(LittleVisitor):
         return LiteralNode(ctx.getText(), LiteralTypes.INTEGER)
 
     def visitProcessMulOp(self, ctx: LittleParser.ProcessMulOpContext):
-        return super().visitProcessMulOp(ctx)
+        left = self.visit(ctx.expr(0))
+        right = self.visit(ctx.expr(1))
+        node = MulExprNode(self.visit(ctx.mulop()), left, right)
+        return node
 
     def visitProcessCallExpr(self, ctx: LittleParser.ProcessCallExprContext):
         return super().visitProcessCallExpr(ctx)
@@ -135,10 +138,10 @@ class LittleVisitorImpl(LittleVisitor):
         return super().visitPrimary(ctx)
 
     def visitAddop(self, ctx: LittleParser.AddopContext):
-        return super().visitAddop(ctx)
+        return ctx.getText()
 
     def visitMulop(self, ctx: LittleParser.MulopContext):
-        return super().visitMulop(ctx)
+        return ctx.getText()
 
     def visitIf_stmt(self, ctx: LittleParser.If_stmtContext):
         return super().visitIf_stmt(ctx)

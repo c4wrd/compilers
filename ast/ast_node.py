@@ -10,3 +10,9 @@ class ASTNode:
 
     def has_children(self):
         return len(self.children) > 0
+
+    def debug(self, level=0):
+        padding = ' ' * level
+        print("%s%s" % (padding, self.__class__.__name__))
+        for child in self.children:
+            child.debug(level+1)

@@ -33,6 +33,7 @@ if __name__ == '__main__':
     visitor = LittleVisitorImpl()
     prog = visitor.visitProgram(tree)
     print(prog)
+    prog.debug()
     # walker = ParseTreeWalker()
     # listener = LittleListenerImpl()
     # walker.walk(listener, tree)
