@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/LittleVisitorImpl.py" line="107" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="a834f3a0-d778-4ddc-aef3-f46231a042b9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LittleVisitorImpl.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ast/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ast/ast_node.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ast/nodes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Little.g4" afterPath="$PROJECT_DIR$/Little.g4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Little.interp" afterPath="$PROJECT_DIR$/Little.interp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LittleListener.py" afterPath="$PROJECT_DIR$/LittleListener.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LittleParser.py" afterPath="$PROJECT_DIR$/LittleParser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LittleVisitor.py" afterPath="$PROJECT_DIR$/LittleVisitor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LittleVisitorImpl.py" afterPath="$PROJECT_DIR$/LittleVisitorImpl.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,56 +22,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="Little.g4" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Little.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Little.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="62" column="9" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="9" />
+            <state relative-caret-position="356">
+              <caret line="52" column="26" lean-forward="true" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LittleListener.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LittleListener.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="128" column="15" lean-forward="false" selection-start-line="128" selection-start-column="15" selection-end-line="128" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LittleVisitorImpl.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LittleVisitorImpl.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LittleVisitorImpl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+            <state relative-caret-position="962">
+              <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nodes.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ast/nodes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3480">
-              <caret line="87" column="19" lean-forward="false" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ast_node.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ast/ast_node.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="11" column="37" lean-forward="true" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,19 +54,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LittleVisitor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LittleVisitor.py">
+      <file leaf-file-name="LittleParser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LittleParser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="4275">
+              <caret line="973" column="19" lean-forward="false" selection-start-line="973" selection-start-column="19" selection-end-line="973" selection-end-column="19" />
               <folding>
-                <marker date="1524371534960" expanded="true" signature="5459:5498" ph="..." />
-                <marker date="1524371534960" expanded="true" signature="5626:5665" ph="..." />
-                <marker date="1524371534960" expanded="true" signature="5793:5832" ph="..." />
-                <marker date="1524371534960" expanded="true" signature="5975:6014" ph="..." />
-                <marker date="1524371534960" expanded="true" signature="6136:6175" ph="..." />
-                <marker date="1524371534960" expanded="true" signature="6291:6330" ph="..." />
+                <marker date="1524417369352" expanded="true" signature="166:293" ph="..." />
+                <marker date="1524417369352" expanded="true" signature="194:293" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Driver.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Driver.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1000">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Little.backup.g4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Little.backup.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1090">
+              <caret line="61" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -138,6 +118,8 @@
       <find>enterFunc_decl(</find>
       <find>enterAnonymousSymbolTable</find>
       <find>INTLIT</find>
+      <find>expr_list_tail</find>
+      <find>add</find>
     </findStrings>
     <replaceStrings>
       <replace>IDENTIFIER</replace>
@@ -175,11 +157,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1890" />
-    <option name="y" value="333" />
-    <option name="width" value="1910" />
-    <option name="height" value="1590" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="1920" />
+    <option name="y" value="43" />
+    <option name="width" value="1920" />
+    <option name="height" value="2117" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -205,11 +187,6 @@
             <path>
               <item name="compulers" type="b2602c69:ProjectViewProjectNode" />
               <item name="compulers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="compulers" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compulers" type="462c0819:PsiDirectoryNode" />
-              <item name="ast" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -278,7 +255,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="43" width="3840" height="2117" extended-state="6" />
+    <frame x="1920" y="43" width="1920" height="2117" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -288,7 +265,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973558" sideWeight="0.48160982" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23583378" sideWeight="0.48107675" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07995736" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16375546" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -296,12 +273,26 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39989206" sideWeight="0.4989339" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33027524" sideWeight="0.5189232" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973558" sideWeight="0.48160982" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23583378" sideWeight="0.48107675" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07995736" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973558" sideWeight="0.49573562" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39989206" sideWeight="0.4989339" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -352,6 +343,25 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/LittleVisitor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="1" column="9" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="1" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LittleParser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="869" column="10" lean-forward="false" selection-start-line="869" selection-start-column="10" selection-end-line="869" selection-end-column="10" />
+          <folding>
+            <marker date="1524417369352" expanded="true" signature="166:293" ph="..." />
+            <marker date="1524417369352" expanded="true" signature="194:293" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/LittleListener.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5120">
@@ -380,7 +390,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -388,7 +397,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34760">
           <caret line="869" column="10" lean-forward="false" selection-start-line="869" selection-start-column="10" selection-end-line="869" selection-end-column="10" />
-          <folding />
+          <folding>
+            <marker date="1524417369352" expanded="true" signature="166:293" ph="..." />
+            <marker date="1524417369352" expanded="true" signature="194:293" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -404,7 +416,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1040">
           <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -412,9 +423,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1000">
           <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -422,7 +431,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -446,7 +454,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -455,7 +462,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11800">
           <caret line="295" column="34" lean-forward="true" selection-start-line="295" selection-start-column="34" selection-end-line="295" selection-end-column="34" />
-          <folding />
+          <folding>
+            <marker date="1524417369352" expanded="true" signature="166:293" ph="..." />
+            <marker date="1524417369352" expanded="true" signature="194:293" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -464,9 +474,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -553,32 +561,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_cases/3.txt" />
-    <entry file="file://$PROJECT_DIR$/Little.backup.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="41" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_cases/1.txt" />
     <entry file="file://$PROJECT_DIR$/test_cases/4.txt" />
     <entry file="file://$PROJECT_DIR$/test_cases/5.txt" />
-    <entry file="file://$PROJECT_DIR$/Driver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LittleLexer.interp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -586,7 +575,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1040">
           <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -594,7 +582,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -610,22 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LittleVisitor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1524371534960" expanded="true" signature="5459:5498" ph="..." />
-            <marker date="1524371534960" expanded="true" signature="5626:5665" ph="..." />
-            <marker date="1524371534960" expanded="true" signature="5793:5832" ph="..." />
-            <marker date="1524371534960" expanded="true" signature="5975:6014" ph="..." />
-            <marker date="1524371534960" expanded="true" signature="6136:6175" ph="..." />
-            <marker date="1524371534960" expanded="true" signature="6291:6330" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -665,26 +636,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LittleParser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7336">
-          <caret line="1747" column="28" lean-forward="false" selection-start-line="1747" selection-start-column="28" selection-end-line="1747" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LittleListener.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="128" column="15" lean-forward="false" selection-start-line="128" selection-start-column="15" selection-end-line="128" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LittleVisitorImpl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        <state relative-caret-position="4275">
+          <caret line="973" column="19" lean-forward="false" selection-start-line="973" selection-start-column="19" selection-end-line="973" selection-end-column="19" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <marker date="1524417369352" expanded="true" signature="166:293" ph="..." />
+            <marker date="1524417369352" expanded="true" signature="194:293" ph="..." />
           </folding>
         </state>
       </provider>
@@ -697,11 +653,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Driver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Little.backup.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1090">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LittleListener.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5120">
+          <caret line="128" column="15" lean-forward="false" selection-start-line="128" selection-start-column="15" selection-end-line="128" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Little.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="62" column="9" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="9" />
+        <state relative-caret-position="356">
+          <caret line="52" column="26" lean-forward="true" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LittleVisitor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="177" column="8" lean-forward="false" selection-start-line="177" selection-start-column="8" selection-end-line="177" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LittleVisitorImpl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="962">
+          <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

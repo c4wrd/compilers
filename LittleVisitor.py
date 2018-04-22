@@ -124,38 +124,28 @@ class LittleVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#processAddOp.
-    def visitProcessAddOp(self, ctx:LittleParser.ProcessAddOpContext):
+    # Visit a parse tree produced by LittleParser#expr.
+    def visitExpr(self, ctx:LittleParser.ExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#processMulOp.
-    def visitProcessMulOp(self, ctx:LittleParser.ProcessMulOpContext):
+    # Visit a parse tree produced by LittleParser#expr_prefix.
+    def visitExpr_prefix(self, ctx:LittleParser.Expr_prefixContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#processCallExpr.
-    def visitProcessCallExpr(self, ctx:LittleParser.ProcessCallExprContext):
+    # Visit a parse tree produced by LittleParser#factor.
+    def visitFactor(self, ctx:LittleParser.FactorContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#processFloatLiteral.
-    def visitProcessFloatLiteral(self, ctx:LittleParser.ProcessFloatLiteralContext):
+    # Visit a parse tree produced by LittleParser#factor_prefix.
+    def visitFactor_prefix(self, ctx:LittleParser.Factor_prefixContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#processIntLiteral.
-    def visitProcessIntLiteral(self, ctx:LittleParser.ProcessIntLiteralContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by LittleParser#processIdentifer.
-    def visitProcessIdentifer(self, ctx:LittleParser.ProcessIdentiferContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by LittleParser#processExpr.
-    def visitProcessExpr(self, ctx:LittleParser.ProcessExprContext):
+    # Visit a parse tree produced by LittleParser#postfix_expr.
+    def visitPostfix_expr(self, ctx:LittleParser.Postfix_exprContext):
         return self.visitChildren(ctx)
 
 
