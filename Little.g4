@@ -40,13 +40,13 @@ return_stmt : RETURN expr ';' ;
 // Expressions
 
 expr
-    : expr addop expr
-    | expr mulop expr
-    | IDENTIFIER
-    | INTLITERAL
-    | FLOATLITERAL
-    | '(' expr ')'
-    | call_expr
+    : expr addop expr #processAddOp
+    | expr mulop expr   #processMulOp
+    | IDENTIFIER    #processIdentifer
+    | INTLITERAL    #processIntLiteral
+    | FLOATLITERAL  #processFloatLiteral
+    | '(' expr ')'  #processExpr
+    | call_expr #processCallExpr
 ;
 
 
