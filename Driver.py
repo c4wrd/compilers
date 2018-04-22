@@ -3,7 +3,7 @@ from antlr4 import *
 from antlr4.error.ErrorListener import ErrorListener
 from LittleLexer import LittleLexer
 from LittleParser import LittleParser
-from LittleListenerImpl import LittleListenerImpl
+from LittleVisitorImpl import LittleVisitorImpl
 
 class CustomErrorListener(ErrorListener):
 
@@ -30,6 +30,9 @@ if __name__ == '__main__':
     parser.addErrorListener(errorListener)
 
     tree = parser.program()
-    walker = ParseTreeWalker()
-    listener = LittleListenerImpl()
-    walker.walk(listener, tree)
+    visitor = LittleVisitorImpl()
+    prog = visitor.visitProgram(tree)
+    print(prog)
+    # walker = ParseTreeWalker()
+    # listener = LittleListenerImpl()
+    # walker.walk(listener, tree)

@@ -49,11 +49,6 @@ class LittleVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#id_tail.
-    def visitId_tail(self, ctx:LittleParser.Id_tailContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by LittleParser#param_decl_list.
     def visitParam_decl_list(self, ctx:LittleParser.Param_decl_listContext):
         return self.visitChildren(ctx)
@@ -124,28 +119,38 @@ class LittleVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#expr.
-    def visitExpr(self, ctx:LittleParser.ExprContext):
+    # Visit a parse tree produced by LittleParser#processAddOp.
+    def visitProcessAddOp(self, ctx:LittleParser.ProcessAddOpContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#expr_prefix.
-    def visitExpr_prefix(self, ctx:LittleParser.Expr_prefixContext):
+    # Visit a parse tree produced by LittleParser#processIdentExpr.
+    def visitProcessIdentExpr(self, ctx:LittleParser.ProcessIdentExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#factor.
-    def visitFactor(self, ctx:LittleParser.FactorContext):
+    # Visit a parse tree produced by LittleParser#processIntExpr.
+    def visitProcessIntExpr(self, ctx:LittleParser.ProcessIntExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#factor_prefix.
-    def visitFactor_prefix(self, ctx:LittleParser.Factor_prefixContext):
+    # Visit a parse tree produced by LittleParser#processMulOp.
+    def visitProcessMulOp(self, ctx:LittleParser.ProcessMulOpContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LittleParser#postfix_expr.
-    def visitPostfix_expr(self, ctx:LittleParser.Postfix_exprContext):
+    # Visit a parse tree produced by LittleParser#processCallExpr.
+    def visitProcessCallExpr(self, ctx:LittleParser.ProcessCallExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LittleParser#processParanExpr.
+    def visitProcessParanExpr(self, ctx:LittleParser.ProcessParanExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LittleParser#processFloatExpr.
+    def visitProcessFloatExpr(self, ctx:LittleParser.ProcessFloatExprContext):
         return self.visitChildren(ctx)
 
 

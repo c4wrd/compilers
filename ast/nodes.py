@@ -14,16 +14,9 @@ class LiteralTypes:
 
 class VarRefNode(ASTNode):
 
-    def __init__(self, var_name: str, type: str):
+    def __init__(self, var_name: str):
         super().__init__()
         self.var_name = var_name
-        self.type = type
-
-    def is_int(self):
-        return self.type == "int"
-
-    def is_float(self):
-        return self.type == "float"
 
 class ExpressionNode(ASTNode):
 
@@ -33,7 +26,7 @@ class ExpressionNode(ASTNode):
     def get_right(self):
         return self.children[1]
 
-class AddExpr(ExpressionNode):
+class AddExprNode(ExpressionNode):
 
     def __init__(self, operator, left: ExpressionNode, right: ExpressionNode):
         super().__init__()
@@ -41,11 +34,13 @@ class AddExpr(ExpressionNode):
         self.children.append(left)
         self.children.append(right)
 
-class MulExpr(ExpressionNode):
+class MulExprNode(ExpressionNode):
 
-    def __init__(self, operator):
+    def __init__(self, operator, left: ExpressionNode, right: ExpressionNode):
         super().__init__()
         self.operator = operator
+        self.children.append(left)
+        self.children.append(right)
 
 class LiteralNode(ExpressionNode):
     """
@@ -77,13 +72,19 @@ class LiteralNode(ExpressionNode):
 
 class VarDeclarationNode(ASTNode):
 
-    def __init__(self, var_name: str, value: ExpressionNode):
+    def __init__(self, var_ref: VarRefNode, type: str):
         super().__init__()
-        self.var_name = var_name
-        self.children.append(value)
+        self.children.append(var_ref)
+        self.type = type
 
-    def get_expr(self):
+    def get_var(self):
         return self.children[0]
+
+class ReadNode(ASTNode):
+    pass
+
+class WriteNode(ASTNode):
+    pass
 
 class AssignmentNode(ASTNode):
 

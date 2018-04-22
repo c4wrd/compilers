@@ -80,15 +80,6 @@ class LittleListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LittleParser#id_tail.
-    def enterId_tail(self, ctx:LittleParser.Id_tailContext):
-        pass
-
-    # Exit a parse tree produced by LittleParser#id_tail.
-    def exitId_tail(self, ctx:LittleParser.Id_tailContext):
-        pass
-
-
     # Enter a parse tree produced by LittleParser#param_decl_list.
     def enterParam_decl_list(self, ctx:LittleParser.Param_decl_listContext):
         pass
@@ -215,48 +206,66 @@ class LittleListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by LittleParser#expr.
-    def enterExpr(self, ctx:LittleParser.ExprContext):
+    # Enter a parse tree produced by LittleParser#processAddOp.
+    def enterProcessAddOp(self, ctx:LittleParser.ProcessAddOpContext):
         pass
 
-    # Exit a parse tree produced by LittleParser#expr.
-    def exitExpr(self, ctx:LittleParser.ExprContext):
-        pass
-
-
-    # Enter a parse tree produced by LittleParser#expr_prefix.
-    def enterExpr_prefix(self, ctx:LittleParser.Expr_prefixContext):
-        pass
-
-    # Exit a parse tree produced by LittleParser#expr_prefix.
-    def exitExpr_prefix(self, ctx:LittleParser.Expr_prefixContext):
+    # Exit a parse tree produced by LittleParser#processAddOp.
+    def exitProcessAddOp(self, ctx:LittleParser.ProcessAddOpContext):
         pass
 
 
-    # Enter a parse tree produced by LittleParser#factor.
-    def enterFactor(self, ctx:LittleParser.FactorContext):
+    # Enter a parse tree produced by LittleParser#processIdentExpr.
+    def enterProcessIdentExpr(self, ctx:LittleParser.ProcessIdentExprContext):
         pass
 
-    # Exit a parse tree produced by LittleParser#factor.
-    def exitFactor(self, ctx:LittleParser.FactorContext):
-        pass
-
-
-    # Enter a parse tree produced by LittleParser#factor_prefix.
-    def enterFactor_prefix(self, ctx:LittleParser.Factor_prefixContext):
-        pass
-
-    # Exit a parse tree produced by LittleParser#factor_prefix.
-    def exitFactor_prefix(self, ctx:LittleParser.Factor_prefixContext):
+    # Exit a parse tree produced by LittleParser#processIdentExpr.
+    def exitProcessIdentExpr(self, ctx:LittleParser.ProcessIdentExprContext):
         pass
 
 
-    # Enter a parse tree produced by LittleParser#postfix_expr.
-    def enterPostfix_expr(self, ctx:LittleParser.Postfix_exprContext):
+    # Enter a parse tree produced by LittleParser#processIntExpr.
+    def enterProcessIntExpr(self, ctx:LittleParser.ProcessIntExprContext):
         pass
 
-    # Exit a parse tree produced by LittleParser#postfix_expr.
-    def exitPostfix_expr(self, ctx:LittleParser.Postfix_exprContext):
+    # Exit a parse tree produced by LittleParser#processIntExpr.
+    def exitProcessIntExpr(self, ctx:LittleParser.ProcessIntExprContext):
+        pass
+
+
+    # Enter a parse tree produced by LittleParser#processMulOp.
+    def enterProcessMulOp(self, ctx:LittleParser.ProcessMulOpContext):
+        pass
+
+    # Exit a parse tree produced by LittleParser#processMulOp.
+    def exitProcessMulOp(self, ctx:LittleParser.ProcessMulOpContext):
+        pass
+
+
+    # Enter a parse tree produced by LittleParser#processCallExpr.
+    def enterProcessCallExpr(self, ctx:LittleParser.ProcessCallExprContext):
+        pass
+
+    # Exit a parse tree produced by LittleParser#processCallExpr.
+    def exitProcessCallExpr(self, ctx:LittleParser.ProcessCallExprContext):
+        pass
+
+
+    # Enter a parse tree produced by LittleParser#processParanExpr.
+    def enterProcessParanExpr(self, ctx:LittleParser.ProcessParanExprContext):
+        pass
+
+    # Exit a parse tree produced by LittleParser#processParanExpr.
+    def exitProcessParanExpr(self, ctx:LittleParser.ProcessParanExprContext):
+        pass
+
+
+    # Enter a parse tree produced by LittleParser#processFloatExpr.
+    def enterProcessFloatExpr(self, ctx:LittleParser.ProcessFloatExprContext):
+        pass
+
+    # Exit a parse tree produced by LittleParser#processFloatExpr.
+    def exitProcessFloatExpr(self, ctx:LittleParser.ProcessFloatExprContext):
         pass
 
 

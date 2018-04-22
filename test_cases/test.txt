@@ -1,0 +1,12 @@
+PROGRAM p
+BEGIN
+
+	INT a;
+
+	FUNCTION VOID main()
+	BEGIN
+		a := 20;
+	    READ(a);
+		WRITE (a);
+	END
+END

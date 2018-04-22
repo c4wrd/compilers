@@ -12,8 +12,9 @@ string_decl : STRING IDENTIFIER ':=' STRINGLITERAL ';' ;
 var_decl : var_type id_list ';' ;
 var_type : FLOAT | INT ;
 any_type : var_type | VOID ;
-id_list : IDENTIFIER id_tail ;
-id_tail : (',' IDENTIFIER id_tail )? ;
+//id_list : IDENTIFIER id_tail ;
+//id_tail : (',' IDENTIFIER id_tail )? ;
+id_list : IDENTIFIER id_list? ;
 
 // Function Parameter List
 param_decl_list : (param_decl param_decl_tail)? ;
@@ -38,7 +39,19 @@ write_stmt : WRITE '(' id_list ')' ';' ;
 return_stmt : RETURN expr ';' ;
 
 // Expressions
-expr : expr_prefix factor ;
+
+expr
+    : expr addop expr #processAddOp
+    | expr mulop expr #processMulOp
+    | IDENTIFIER #processIdentExpr
+    | INTLITERAL #processIntExpr
+    | FLOATLITERAL #processFloatExpr
+    | '(' expr ')' #processParanExpr
+    | call_expr #processCallExpr
+;
+
+
+/*expr : expr_prefix factor ;
 expr_prefix : expr_prefix factor addop
     | // empty
     ;
@@ -47,7 +60,7 @@ factor_prefix
     : factor_prefix postfix_expr mulop
     | // empty
     ;
-postfix_expr : primary | call_expr ;
+postfix_expr : primary | call_expr ; */
 call_expr : IDENTIFIER '(' expr_list ')' ;
 expr_list : (expr expr_list_tail)? ;
 expr_list_tail : (',' expr expr_list_tail)? ;
