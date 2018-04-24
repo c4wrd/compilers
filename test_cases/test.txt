@@ -1,11 +1,13 @@
 PROGRAM p
 BEGIN
 
-	INT a;
+	INT a, b, c;
 
 	FUNCTION VOID main()
 	BEGIN
-		a := 20;
+		a := 1;
+		b := 2;
+		c := a + b;
 	    READ(a);
 		WRITE (a);
 	END

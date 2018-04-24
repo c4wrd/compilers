@@ -9,7 +9,8 @@ class LittleVisitorImpl(LittleVisitor):
 
     def __init__(self):
         super().__init__()
-        self.types = {}
+        # dictionary for storing variable reference nodes
+        self.var_refs = {}
 
     def visitProgram(self, ctx: LittleParser.ProgramContext):
         return super().visitProgram(ctx)
@@ -21,28 +22,39 @@ class LittleVisitorImpl(LittleVisitor):
         return super().visitDecl(ctx)
 
     def visitString_decl(self, ctx: LittleParser.String_declContext):
-        node = LiteralNode(ctx.IDENTIFIER().getText(), LiteralTypes.STRING)
+        node = LiteralNode(ctx.IDENTIFIER().getText(), LiteralType.STRING)
         return node
 
     def visitVar_decl(self, ctx: LittleParser.Var_declContext) -> List[VarDeclarationNode]:
         var_type = self.visit(ctx.var_type())
         id_nodes = self.visit(ctx.id_list())
-        return [VarDeclarationNode(id_node, var_type) for id_node in id_nodes]
+        # store variable references in a dictionary for easy lookup of type
+        for id in id_nodes:
+            self.var_refs[id] = VarRefNode(id, var_type)
+        return [VarDeclarationNode(self.var_refs[id], var_type) for id in id_nodes]
 
     def visitVar_type(self, ctx: LittleParser.Var_typeContext):
         if ctx.getText() == "INT":
-            return LiteralTypes.INTEGER
+            return LiteralType.INTEGER
         else:
-            return LiteralTypes.FLOAT
+            return LiteralType.FLOAT
 
     def visitAny_type(self, ctx: LittleParser.Any_typeContext):
         return super().visitAny_type(ctx)
 
     def visitId_list(self, ctx: LittleParser.Id_listContext) -> List[VarRefNode]:
-        id_list = []
-        id_list.append(VarRefNode(ctx.IDENTIFIER().getText()))
-        if ctx.id_list() is not None: # add additional ids
-            id_list.extend(self.visit(ctx.id_list()))
+        id_list = [ctx.IDENTIFIER().getText()]
+        if ctx.id_tail() is not None: # add additional ids
+            id_list.extend(self.visit(ctx.id_tail()))
+        return id_list
+
+    def visitId_tail(self, ctx: LittleParser.Id_tailContext):
+        if ctx.IDENTIFIER() is None:
+            return []
+
+        id_list = [ctx.IDENTIFIER().getText()]
+        if ctx.id_tail() is not None:
+            id_list.extend(self.visit(ctx.id_tail()))
         return id_list
 
     def visitParam_decl_list(self, ctx: LittleParser.Param_decl_listContext):
@@ -83,19 +95,21 @@ class LittleVisitorImpl(LittleVisitor):
         return super().visitAssign_stmt(ctx)
 
     def visitAssign_expr(self, ctx: LittleParser.Assign_exprContext):
-        return AssignmentNode(ctx.IDENTIFIER().getText(), self.visit(ctx.expr()))
+        return AssignmentNode(self.var_refs[ctx.IDENTIFIER().getText()], self.visit(ctx.expr()))
 
     def visitRead_stmt(self, ctx: LittleParser.Read_stmtContext):
         node = ReadNode()
         ids = self.visit(ctx.id_list())
-        for id in ids:
+        id_refs = [self.var_refs[id] for id in ids]
+        for id in id_refs:
             node.add_child(id)
         return node
 
     def visitWrite_stmt(self, ctx: LittleParser.Write_stmtContext):
         node = WriteNode()
         ids = self.visit(ctx.id_list())
-        for id in ids:
+        id_refs = [self.var_refs[id] for id in ids]
+        for id in id_refs:
             node.add_child(id)
         return node
 
@@ -109,13 +123,13 @@ class LittleVisitorImpl(LittleVisitor):
         return node
 
     def visitProcessIdentExpr(self, ctx: LittleParser.ProcessIdentExprContext):
-        return VarRefNode(ctx.IDENTIFIER().getText())
+        return self.var_refs[ctx.IDENTIFIER().getText()]
 
     def visitProcessFloatExpr(self, ctx: LittleParser.ProcessFloatExprContext):
-        return LiteralNode(ctx.getText(), LiteralTypes.FLOAT)
+        return LiteralNode(ctx.getText(), LiteralType.FLOAT)
 
     def visitProcessIntExpr(self, ctx: LittleParser.ProcessIntExprContext):
-        return LiteralNode(ctx.getText(), LiteralTypes.INTEGER)
+        return LiteralNode(ctx.getText(), LiteralType.INTEGER)
 
     def visitProcessMulOp(self, ctx: LittleParser.ProcessMulOpContext):
         left = self.visit(ctx.expr(0))

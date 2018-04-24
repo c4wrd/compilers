@@ -27,16 +27,24 @@ class Operators:
     MUL = "*"
     DIV = "/"
 
-class LiteralTypes:
+class LiteralType:
     STRING = "string"
     INTEGER = "integer"
     FLOAT = "float"
 
 class VarRefNode(ASTNode):
 
-    def __init__(self, var_name: str):
+    def __init__(self, var_name: str, type: LiteralType):
         super().__init__()
         self.var_name = var_name
+        self.type = type
+
+    def accept(self, context: IRContext) -> CodeObject:
+        object = CodeObject()
+        object.result = self.var_name
+        object.result_type = self.type
+        return object
+
 
 class ExpressionNode(ASTNode):
 
@@ -123,13 +131,13 @@ class LiteralNode(ExpressionNode):
         self.type = type
 
     def is_string(self):
-        return self.type == LiteralTypes.STRING
+        return self.type == LiteralType.STRING
 
     def is_int(self):
-        return self.type == LiteralTypes.INTEGER
+        return self.type == LiteralType.INTEGER
 
     def is_float(self):
-        return self.type == LiteralTypes.FLOAT
+        return self.type == LiteralType.FLOAT
 
     def as_string(self):
         return self.value
@@ -167,21 +175,55 @@ class ReadNode(ASTNode):
 
     def accept(self, context: IRContext) -> CodeObject:
         object = CodeObject()
-
-
+        for node in self.children: # typeof VarRefNode
+            if node.type == LiteralType.INTEGER:
+                object.add_op(READI(node.var_name))
+            else:
+                object.add_op(READF(node.var_name))
+        return object
 
 class WriteNode(ASTNode):
-    pass
+
+    def accept(self, context: IRContext) -> CodeObject:
+        object = CodeObject()
+        for node in self.children:
+            if node.type == LiteralType.INTEGER:
+                object.add_op(WRITEI(node.var_name))
+            elif node.type == LiteralType.FLOAT:
+                object.add_op(WRITEF(node.var_name))
+            else:
+                object.add_op(WRITES(node.var_name))
+        return object
 
 class AssignmentNode(ASTNode):
 
-    def __init__(self, var_name, value: ExpressionNode):
+    def __init__(self, var_ref: VarRefNode, value: ExpressionNode):
         super().__init__()
-        self.var_name = var_name
+        self.var_ref = var_ref
         self.children.append(value)
 
+    def accept(self, context: IRContext) -> CodeObject:
+        object = CodeObject()
+        left_object: CodeObject = self.children[0].accept(context)
+        object.add(left_object)
+        object.result = context.next_register()
+        object.result_type = left_object.result_type
+        if left_object.result_type == ResultType.INT:
+            object.add_op(STOREI(left_object.result, object.result))
+        else:
+            object.add_op(STOREF(left_object.result, object.result))
+        return object
 
 class StatementListNode(ASTNode):
 
     def add_statement(self, statement: Union[VarDeclarationNode, AssignmentNode]):
         self.children.append(statement)
+
+    def accept(self, context: IRContext) -> CodeObject:
+        object = CodeObject()
+        object.result_type = ResultType.NONE
+        object.result = None
+        for statement in self.children:
+            object.add(statement.accept(context))
+        return object
+

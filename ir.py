@@ -27,8 +27,12 @@ class CodeObject:
     def set_result(self, result):
         self.result = result
 
-    def set_result_type(self, result_type: ResultType):
+    def set_result_type(self, result_type):
         self.result_type = result_type
+
+    def debug(self):
+        for node in self.ir_nodes:
+            node.debug()
 
 class ResultType(Enum):
     INT = auto()
@@ -41,6 +45,10 @@ class IRNode:
         self.op = op
         self.args = args
         self.result_type = result_type
+
+    def debug(self):
+        args = ', '.join([str(arg) for arg in self.args])
+        print("%s %s \t %s" % (self.op, args, self.result_type))
 
 class ADDI(IRNode):
 

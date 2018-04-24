@@ -49,6 +49,11 @@ class LittleVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by LittleParser#id_tail.
+    def visitId_tail(self, ctx:LittleParser.Id_tailContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by LittleParser#param_decl_list.
     def visitParam_decl_list(self, ctx:LittleParser.Param_decl_listContext):
         return self.visitChildren(ctx)

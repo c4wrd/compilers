@@ -12,9 +12,9 @@ string_decl : STRING IDENTIFIER ':=' STRINGLITERAL ';' ;
 var_decl : var_type id_list ';' ;
 var_type : FLOAT | INT ;
 any_type : var_type | VOID ;
-//id_list : IDENTIFIER id_tail ;
-//id_tail : (',' IDENTIFIER id_tail )? ;
-id_list : IDENTIFIER id_list? ;
+id_list : IDENTIFIER id_tail ;
+id_tail : (',' IDENTIFIER id_tail )? ;
+//id_list : IDENTIFIER (',' id_list)? ;
 
 // Function Parameter List
 param_decl_list : (param_decl param_decl_tail)? ;

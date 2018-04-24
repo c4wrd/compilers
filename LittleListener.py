@@ -80,6 +80,15 @@ class LittleListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by LittleParser#id_tail.
+    def enterId_tail(self, ctx:LittleParser.Id_tailContext):
+        pass
+
+    # Exit a parse tree produced by LittleParser#id_tail.
+    def exitId_tail(self, ctx:LittleParser.Id_tailContext):
+        pass
+
+
     # Enter a parse tree produced by LittleParser#param_decl_list.
     def enterParam_decl_list(self, ctx:LittleParser.Param_decl_listContext):
         pass
