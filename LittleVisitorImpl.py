@@ -35,7 +35,7 @@ class LittleVisitorImpl(LittleVisitor):
 
     def visitVar_type(self, ctx: LittleParser.Var_typeContext):
         if ctx.getText() == "INT":
-            return LiteralType.INTEGER
+            return LiteralType.INT
         else:
             return LiteralType.FLOAT
 
@@ -129,7 +129,7 @@ class LittleVisitorImpl(LittleVisitor):
         return LiteralNode(ctx.getText(), LiteralType.FLOAT)
 
     def visitProcessIntExpr(self, ctx: LittleParser.ProcessIntExprContext):
-        return LiteralNode(ctx.getText(), LiteralType.INTEGER)
+        return LiteralNode(ctx.getText(), LiteralType.INT)
 
     def visitProcessMulOp(self, ctx: LittleParser.ProcessMulOpContext):
         left = self.visit(ctx.expr(0))

@@ -29,8 +29,9 @@ class Operators:
 
 class LiteralType:
     STRING = "string"
-    INTEGER = "integer"
+    INT = "integer"
     FLOAT = "float"
+    NONE = "none"
 
 class VarRefNode(ASTNode):
 
@@ -72,18 +73,18 @@ class AddExprNode(ExpressionNode):
         object.add(left_object, right_object)
         # set result register
         object.result = context.next_register()
-        if left_object.result_type == ResultType.INT:
+        if left_object.result_type == LiteralType.INT:
             if self.operator == Operators.ADD:
                 object.add_op(ADDI(left_object.result, right_object.result, object.result))
             else:
                 object.add_op(SUBI(left_object.result, right_object.result, object.result))
-            object.result_type = ResultType.INT
+            object.result_type = LiteralType.INT
         else:
             if self.operator == Operators.ADD:
                 object.add_op(ADDF(left_object.result, right_object.result, object.result))
             else:
                 object.add_op(SUBF(left_object.result, right_object.result, object.result))
-            object.result_type = ResultType.FLOAT
+            object.result_type = LiteralType.FLOAT
         return object
 
 
@@ -106,18 +107,18 @@ class MulExprNode(ExpressionNode):
         object.add(left_object, right_object)
         # set result register
         object.result = context.next_register()
-        if left_object.result_type == ResultType.INT:
+        if left_object.result_type == LiteralType.INT:
             if self.operator == Operators.MUL:
                 object.add_op(MULTI(left_object.result, right_object.result, object.result))
             else:
                 object.add_op(DIVI(left_object.result, right_object.result, object.result))
-            object.result_type = ResultType.INT
+            object.result_type = LiteralType.INT
         else:
             if self.operator == Operators.MUL:
                 object.add_op(MULTF(left_object.result, right_object.result, object.result))
             else:
                 object.add_op(DIVF(left_object.result, right_object.result, object.result))
-            object.result_type = ResultType.FLOAT
+            object.result_type = LiteralType.FLOAT
         return object
 
 class LiteralNode(ExpressionNode):
@@ -134,7 +135,7 @@ class LiteralNode(ExpressionNode):
         return self.type == LiteralType.STRING
 
     def is_int(self):
-        return self.type == LiteralType.INTEGER
+        return self.type == LiteralType.INT
 
     def is_float(self):
         return self.type == LiteralType.FLOAT
@@ -152,12 +153,11 @@ class LiteralNode(ExpressionNode):
         object = CodeObject()
         object.result = context.next_register()
         if self.is_int():
-            object.result_type = ResultType.INT
+            object.result_type = LiteralType.INT
             object.add_op(STOREI(self.as_int(), object.result))
         elif self.is_float():
-            object.result_type = ResultType.FLOAT
+            object.result_type = LiteralType.FLOAT
             object.add_op(STOREF(self.as_float(), object.result))
-        object.result = context.next_register()
         return object
 
 
@@ -176,7 +176,7 @@ class ReadNode(ASTNode):
     def accept(self, context: IRContext) -> CodeObject:
         object = CodeObject()
         for node in self.children: # typeof VarRefNode
-            if node.type == LiteralType.INTEGER:
+            if node.type == LiteralType.INT:
                 object.add_op(READI(node.var_name))
             else:
                 object.add_op(READF(node.var_name))
@@ -187,7 +187,7 @@ class WriteNode(ASTNode):
     def accept(self, context: IRContext) -> CodeObject:
         object = CodeObject()
         for node in self.children:
-            if node.type == LiteralType.INTEGER:
+            if node.type == LiteralType.INT:
                 object.add_op(WRITEI(node.var_name))
             elif node.type == LiteralType.FLOAT:
                 object.add_op(WRITEF(node.var_name))
@@ -207,8 +207,11 @@ class AssignmentNode(ASTNode):
         left_object: CodeObject = self.children[0].accept(context)
         object.add(left_object)
         object.result = self.var_ref.var_name
-        object.result_type = self.var_ref.type
-        if left_object.result_type == ResultType.INT:
+        if self.var_ref.type == LiteralType.INT:
+            object.result_type = LiteralType.INT
+        else:
+            object.result_type = LiteralType.FLOAT
+        if left_object.result_type == LiteralType.INT:
             object.add_op(STOREI(left_object.result, object.result))
         else:
             object.add_op(STOREF(left_object.result, object.result))
@@ -221,7 +224,7 @@ class StatementListNode(ASTNode):
 
     def accept(self, context: IRContext) -> CodeObject:
         object = CodeObject()
-        object.result_type = ResultType.NONE
+        object.result_type = LiteralType.NONE
         object.result = None
         for statement in self.children:
             object.add(statement.accept(context))
