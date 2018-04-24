@@ -1,3 +1,4 @@
+from enum import IntEnum
 from typing import *
 from ir import *
 
@@ -33,6 +34,10 @@ class LiteralType:
     FLOAT = "float"
     NONE = "none"
 
+class Flags(IntEnum):
+    LVALUE = auto()
+    RVALUE = auto()
+
 class VarRefNode(ASTNode):
 
     def __init__(self, var_name: str, type: LiteralType):
@@ -49,6 +54,10 @@ class VarRefNode(ASTNode):
 
 class ExpressionNode(ASTNode):
 
+    def __init__(self, flags):
+        super().__init__()
+        self.flags = flags
+
     def get_left(self):
         return self.children[0]
 
@@ -58,7 +67,7 @@ class ExpressionNode(ASTNode):
 class AddExprNode(ExpressionNode):
 
     def __init__(self, operator, left: ExpressionNode, right: ExpressionNode):
-        super().__init__()
+        super().__init__(Flags.RVALUE)
         self.operator = operator
         self.children.append(left)
         self.children.append(right)
@@ -92,7 +101,7 @@ class AddExprNode(ExpressionNode):
 class MulExprNode(ExpressionNode):
 
     def __init__(self, operator, left: ExpressionNode, right: ExpressionNode):
-        super().__init__()
+        super().__init__(Flags.RVALUE)
         self.operator = operator
         self.children.append(left)
         self.children.append(right)
@@ -127,7 +136,7 @@ class LiteralNode(ExpressionNode):
     """
 
     def __init__(self, value, type):
-        super().__init__()
+        super().__init__(Flags.LVALUE)
         self.value = value
         self.type = type
 

@@ -4,7 +4,9 @@ from antlr4.error.ErrorListener import ErrorListener
 from LittleLexer import LittleLexer
 from LittleParser import LittleParser
 from LittleVisitorImpl import LittleVisitorImpl
+from ir import CodeObject
 from ir_builder import IRBuilder
+from optimizer import IROptimizer
 
 
 class CustomErrorListener(ErrorListener):
@@ -35,8 +37,15 @@ if __name__ == '__main__':
     visitor = LittleVisitorImpl()
     prog = visitor.visitProgram(tree)
     ir = IRBuilder(prog)
-    code = ir.get_code()
-    code.debug()
+    code: CodeObject = ir.get_code()
+
+    initial_len = len(code.ir_nodes)
+    optimizer = IROptimizer(code.ir_nodes)
+    opt_code = optimizer.eval()
+    for node in opt_code:
+        node.debug()
+    final_len = len(opt_code)
+    print("Optimization optimized by %.2f%%" % ((initial_len - final_len) / initial_len * 100))
     # walker = ParseTreeWalker()
     # listener = LittleListenerImpl()
     # walker.walk(listener, tree)

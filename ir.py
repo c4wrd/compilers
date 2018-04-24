@@ -39,6 +39,23 @@ class ResultType(Enum):
     FLOAT = auto()
     NONE = auto()
 
+class Ops:
+    ADDI = "ADDI"
+    SUBI = "SUBI"
+    MULTI = "MULTI"
+    DIVI = "DIVI"
+    ADDF = "ADDF"
+    SUBF = "SUBF"
+    MULTF = "MULTF"
+    DIVF = "DIVF"
+    STOREI = "STOREI"
+    STOREF = "STOREF"
+    READI = "READI"
+    READF = "READF"
+    WRITEI = "WRITEI"
+    WRITEF = "WRITEF"
+    WRITES = "WRITES"
+
 class IRNode:
 
     def __init__(self, op, args, result_type: ResultType):
