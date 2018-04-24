@@ -206,8 +206,8 @@ class AssignmentNode(ASTNode):
         object = CodeObject()
         left_object: CodeObject = self.children[0].accept(context)
         object.add(left_object)
-        object.result = context.next_register()
-        object.result_type = left_object.result_type
+        object.result = self.var_ref.var_name
+        object.result_type = self.var_ref.type
         if left_object.result_type == ResultType.INT:
             object.add_op(STOREI(left_object.result, object.result))
         else:
