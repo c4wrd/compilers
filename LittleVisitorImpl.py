@@ -1,11 +1,15 @@
-from antlr4.tree.Tree import TerminalNodeImpl
+from typing import *
 
 from LittleParser import LittleParser
 from LittleVisitor import LittleVisitor
-from typing import *
-from ast.nodes import *
+from ast import *
+
 
 class LittleVisitorImpl(LittleVisitor):
+
+    def __init__(self):
+        super().__init__()
+        self.types = {}
 
     def visitProgram(self, ctx: LittleParser.ProgramContext):
         return super().visitProgram(ctx)
