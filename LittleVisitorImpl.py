@@ -175,8 +175,6 @@ class LittleVisitorImpl(LittleVisitor):
 
         return IfExprNode(condExpr, then_stmt_list, else_stmt_list)
 
-
-
     def visitElse_part(self, ctx: LittleParser.Else_partContext) -> Union[StatementListNode, None]:
         if ctx.ELSE() is not None:
             self.visit(ctx.decl())

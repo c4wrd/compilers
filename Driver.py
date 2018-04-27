@@ -6,7 +6,7 @@ from LittleLexer import LittleLexer
 from LittleParser import LittleParser
 from LittleVisitorImpl import LittleVisitorImpl, LiteralType
 from asm import AsmConverter
-from ir import CodeObject, TemporaryContext
+from ir import CodeObject, IdProviderContext
 from ir_builder import IRBuilder
 from optimizer import IROptimizer
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     var_refs = visitor.var_refs
 
     # create IR from program
-    context = TemporaryContext()
+    context = IdProviderContext()
     ir = IRBuilder(prog, context)
     code = ir.get_code() # type: CodeObject
 
@@ -71,12 +71,12 @@ if __name__ == '__main__':
     initial_len = len(code.ir_nodes)
     optimizer = IROptimizer(code.ir_nodes)
     optimized_ir_code = optimizer.eval()
-    # for node in opt_code:
-    #     node.debug()
-    # final_len = len(opt_code)
+    for node in optimized_ir_code:
+        node.debug()
+    final_len = len(optimized_ir_code)
     # print("Optimization optimized by %.2f%%" % ((initial_len - final_len) / initial_len * 100))
 
     # final compilation step to convert IR -> assembly
-    converter = AsmConverter(optimized_ir_code, var_refs.values(), context)
-    code = converter.convert(debug=True, inline=False)
-    run_tiny(code)
+    # converter = AsmConverter(optimized_ir_code, var_refs.values(), context)
+    # code = converter.convert(debug=True, inline=False)
+    # run_tiny(code)

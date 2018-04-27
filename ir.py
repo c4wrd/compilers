@@ -1,6 +1,6 @@
 from enum import Enum
 
-class TemporaryContext:
+class IdProviderContext:
 
     def __init__(self):
         self.count = 0
@@ -14,15 +14,15 @@ class TemporaryContext:
        self.count += 1
        return "r%d" % self.count
 
-    def next_exit(self):
+    def next_exit_label(self):
         self.label_count += 1
         return "EXIT_%d" % self.label_count
 
-    def next_else(self):
+    def next_else_label(self):
         self.label_count += 1
         return "ELSE_%d" % self.label_count
 
-    def next_loop(self):
+    def next_loop_label(self):
         self.label_count += 1
         return "LOOP_%d" % self.label_count
 
@@ -39,7 +39,10 @@ class CodeObject:
     def add(self, *objects):
         # add the code for the CodeObject object passed in the arguments (children)
         for object in objects:
-            self.ir_nodes.extend(object.ir_nodes)
+            if isinstance(object, IRNode):
+                self.ir_nodes.append(object)
+            else:
+                self.ir_nodes.extend(object.ir_nodes)
 
     def set_result(self, result):
         self.result = result
@@ -72,6 +75,14 @@ class Ops:
     WRITEI = "WRITEI"
     WRITEF = "WRITEF"
     WRITES = "WRITES"
+    JUMP = "JUMP"
+    LABEL = "LABEL"
+    GT = "GT"
+    GE = "GE"
+    LT = "LT"
+    LE = "LE"
+    NE = "NE"
+    EQ = "EQ"
 
 class IRNode:
 
@@ -81,8 +92,8 @@ class IRNode:
         self.result_type = result_type
 
     def __str__(self):
-        args = ', '.join([str(arg) for arg in self.args])
-        return "%s %s \t %s" % (self.op, args, self.result_type)
+        args = ' '.join([str(arg) for arg in self.args])
+        return "%s %s" % (self.op, args)
 
     def debug(self):
         print(str(self))
@@ -190,15 +201,29 @@ class EQ(IRNode):
         super().__init__("EQ", (op1, op2, label), ResultType.NONE)
 
 def get_comp_node(compop: str, op1, op2, label) -> IRNode:
-    if str == ">":
+    if compop == ">":
         return GT(op1, op2, label)
-    elif str == ">=":
+    elif compop == ">=":
         return GE(op1, op2, label)
-    elif str == "<":
+    elif compop == "<":
         return LT(op1, op2, label)
-    elif str == "<=":
+    elif compop == "<=":
         return LE(op1, op2, label)
-    elif str == "!=":
+    elif compop == "!=":
         return NE(op1, op2, label)
-    elif str == "==":
+    elif compop == "==":
         return EQ(op1, op2, label)
+
+def get_negated_comp_node(compop: str, op1, op2, label) -> IRNode:
+    if compop == ">":
+        return LE(op1, op2, label)
+    elif compop == ">=":
+        return LT(op1, op2, label)
+    elif compop == "<":
+        return GE(op1, op2, label)
+    elif compop == "<=":
+        return GT(op1, op2, label)
+    elif compop == "!=":
+        return EQ(op1, op2, label)
+    elif compop == "==":
+        return NE(op1, op2, label)

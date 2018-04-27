@@ -54,7 +54,7 @@ def handler(func: Callable):
     return anonymous_func
 
 
-def convert_ADDI(value: ADDI, context: TemporaryContext) -> List[AsmOp]:
+def convert_ADDI(value: ADDI, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -63,7 +63,7 @@ def convert_ADDI(value: ADDI, context: TemporaryContext) -> List[AsmOp]:
         make("move {} {}", temp_register, result)
     ]
 
-def convert_SUBI(value: SUBI, context: TemporaryContext) -> List[AsmOp]:
+def convert_SUBI(value: SUBI, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -73,7 +73,7 @@ def convert_SUBI(value: SUBI, context: TemporaryContext) -> List[AsmOp]:
     ]
 
 
-def convert_MULTI(value: MULTI, context: TemporaryContext) -> List[AsmOp]:
+def convert_MULTI(value: MULTI, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -82,7 +82,7 @@ def convert_MULTI(value: MULTI, context: TemporaryContext) -> List[AsmOp]:
         make("move {} {}", temp_register, result)
     ]
 
-def convert_DIVI(value: DIVI, context: TemporaryContext) -> List[AsmOp]:
+def convert_DIVI(value: DIVI, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -92,7 +92,7 @@ def convert_DIVI(value: DIVI, context: TemporaryContext) -> List[AsmOp]:
     ]
 
 
-def convert_ADDF(value: ADDF, context: TemporaryContext) -> List[AsmOp]:
+def convert_ADDF(value: ADDF, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -102,7 +102,7 @@ def convert_ADDF(value: ADDF, context: TemporaryContext) -> List[AsmOp]:
     ]
 
 
-def convert_SUBF(value: SUBF, context: TemporaryContext) -> List[AsmOp]:
+def convert_SUBF(value: SUBF, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -112,7 +112,7 @@ def convert_SUBF(value: SUBF, context: TemporaryContext) -> List[AsmOp]:
     ]
 
 
-def convert_MULTF(value: MULTF, context: TemporaryContext) -> List[AsmOp]:
+def convert_MULTF(value: MULTF, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -122,7 +122,7 @@ def convert_MULTF(value: MULTF, context: TemporaryContext) -> List[AsmOp]:
     ]
 
 
-def convert_DIVF(value: DIVF, context: TemporaryContext) -> List[AsmOp]:
+def convert_DIVF(value: DIVF, context: IdProviderContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -132,53 +132,84 @@ def convert_DIVF(value: DIVF, context: TemporaryContext) -> List[AsmOp]:
     ]
 
 
-def convert_STOREI(value: STOREI, context: TemporaryContext) -> List[AsmOp]:
+def convert_STOREI(value: STOREI, context: IdProviderContext) -> List[AsmOp]:
     op1, result = getargs(value.args)
     return [
         make("move {} {}", op1, result)
     ]
 
 
-def convert_STOREF(value: STOREF, context: TemporaryContext) -> List[AsmOp]:
+def convert_STOREF(value: STOREF, context: IdProviderContext) -> List[AsmOp]:
     op1, result = getargs(value.args)
     return [
         make("move {} {}", op1, result)
     ]
 
 
-def convert_READI(value: READI, context: TemporaryContext) -> List[AsmOp]:
+def convert_READI(value: READI, context: IdProviderContext) -> List[AsmOp]:
     result = getargs(value.args)
     return [
         make("sys readi {}", result)
     ]
 
 
-def convert_READF(value: READF, context: TemporaryContext) -> List[AsmOp]:
+def convert_READF(value: READF, context: IdProviderContext) -> List[AsmOp]:
     result = getargs(value.args)
     return [
         make("sys readr {}", result)
     ]
 
 
-def convert_WRITEI(value: WRITEI, context: TemporaryContext) -> List[AsmOp]:
+def convert_WRITEI(value: WRITEI, context: IdProviderContext) -> List[AsmOp]:
     op1 = getargs(value.args)
     return [
         make("sys writei {}", op1)
     ]
 
 
-def convert_WRITEF(value: WRITEF, context: TemporaryContext) -> List[AsmOp]:
+def convert_WRITEF(value: WRITEF, context: IdProviderContext) -> List[AsmOp]:
     op1 = getargs(value.args)
     return [
         make("sys writer {}", op1)
     ]
 
 
-def convert_WRITES(value: WRITES, context: TemporaryContext) -> List[AsmOp]:
+def convert_WRITES(value: WRITES, context: IdProviderContext) -> List[AsmOp]:
     op1 = getargs(value.args)
     return [
         make("sys writes {}", op1)
     ]
+
+def convert_JUMP(value: JUMP, context: IdProviderContext) -> List[AsmOp]:
+    pass
+
+
+def convert_LABEL(value: LABEL, context: IdProviderContext) -> List[AsmOp]:
+    pass
+
+
+def convert_GT(value: GT, context: IdProviderContext) -> List[AsmOp]:
+    pass
+
+
+def convert_GE(value: GE, context: IdProviderContext) -> List[AsmOp]:
+    pass
+
+
+def convert_LT(value: LT, context: IdProviderContext) -> List[AsmOp]:
+    pass
+
+
+def convert_LE(value: LE, context: IdProviderContext) -> List[AsmOp]:
+    pass
+
+
+def convert_NE(value: NE, context: IdProviderContext) -> List[AsmOp]:
+    pass
+
+
+def convert_EQ(value: EQ, context: IdProviderContext) -> List[AsmOp]:
+    pass
 
 
 """
@@ -200,12 +231,20 @@ CONVERSIONS = {
     Ops.READF: handler(convert_READF),
     Ops.WRITEI: handler(convert_WRITEI),
     Ops.WRITEF: handler(convert_WRITEF),
-    Ops.WRITES: handler(convert_WRITES)
+    Ops.WRITES: handler(convert_WRITES),
+    Ops.JUMP: handler(convert_JUMP),
+    Ops.LABEL: handler(convert_LABEL),
+    Ops.GT: handler(convert_GT),
+    Ops.GE: handler(convert_GE),
+    Ops.LT: handler(convert_LT),
+    Ops.LE: handler(convert_LE),
+    Ops.NE: handler(convert_NE),
+    Ops.EQ: handler(convert_EQ)
 }
 
 
 class AsmConverter:
-    def __init__(self, code: List[IRNode], variables: List[VarRefNode], context: TemporaryContext):
+    def __init__(self, code: List[IRNode], variables: List[VarRefNode], context: IdProviderContext):
         self.ir_ops = code
         self.variables = variables
         self.context = context

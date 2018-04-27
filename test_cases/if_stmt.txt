@@ -3,8 +3,8 @@ BEGIN
 
 	INT a,b;
 	STRING newline := "\n";
-	STRING B_BIGGER := "B is bigger!\n";
-	STRING A_BIGGER := "A is bigger!\n";
+	STRING bBIGGER := "B is bigger!\n";
+	STRING aBIGGER := "A is bigger!\n";
 
 	FUNCTION VOID main()
 	BEGIN
@@ -12,12 +12,12 @@ BEGIN
         b := 2;
 
         IF ( a < b )
-            WRITE(B_BIGGER);
+            WRITE(bBIGGER);
         ELSE
-            WRITE(A_BIGGER);
+            WRITE(aBIGGER);
         ENDIF
 
-      WRITE(c, newline, d, newline, e, newline);
+      WRITE(a, newline, b, newline);
 
 	END
 END
