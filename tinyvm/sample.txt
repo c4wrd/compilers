@@ -1,0 +1,41 @@
+; STOREI 1, a 	 ResultType.INT
+; STOREI 2, b 	 ResultType.INT
+; READI c 	 ResultType.INT
+; READI d 	 ResultType.INT
+; MULTI a, c, $T3 	 ResultType.INT
+; MULTI b, d, $T4 	 ResultType.INT
+; ADDI $T3, $T4, $T5 	 ResultType.INT
+; STOREI $T5, e 	 ResultType.INT
+; WRITEI c 	 ResultType.NONE
+; WRITES newline 	 ResultType.NONE
+; WRITEI d 	 ResultType.NONE
+; WRITES newline 	 ResultType.NONE
+; WRITEI e 	 ResultType.NONE
+; WRITES newline 	 ResultType.NONE
+str newline "\n"
+var c
+var b
+var e
+var d
+var a
+move 1 a
+move 2 b
+sys readi c
+sys readi d
+move a r6
+muli c r6
+move r6 r3
+move b r7
+muli d r7
+move r7 r4
+addi r3 r8
+addi r4 r8
+move r8 r5
+move r5 e
+sys writei c
+sys writes newline
+sys writei d
+sys writes newline
+sys writei e
+sys writes newline
+sys halt

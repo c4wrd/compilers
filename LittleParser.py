@@ -83,9 +83,9 @@ def serializedATN():
         buf.write("\2\u00bf\u00c2\3\2\2\2\u00c0\u00c2\5\62\32\2\u00c1\u00b8")
         buf.write("\3\2\2\2\u00c1\u00ba\3\2\2\2\u00c1\u00bb\3\2\2\2\u00c1")
         buf.write("\u00bc\3\2\2\2\u00c1\u00c0\3\2\2\2\u00c2\u00cd\3\2\2\2")
-        buf.write("\u00c3\u00c4\f\t\2\2\u00c4\u00c5\5:\36\2\u00c5\u00c6\5")
+        buf.write("\u00c3\u00c4\f\t\2\2\u00c4\u00c5\5<\37\2\u00c5\u00c6\5")
         buf.write("\60\31\n\u00c6\u00cc\3\2\2\2\u00c7\u00c8\f\b\2\2\u00c8")
-        buf.write("\u00c9\5<\37\2\u00c9\u00ca\5\60\31\t\u00ca\u00cc\3\2\2")
+        buf.write("\u00c9\5:\36\2\u00c9\u00ca\5\60\31\t\u00ca\u00cc\3\2\2")
         buf.write("\2\u00cb\u00c3\3\2\2\2\u00cb\u00c7\3\2\2\2\u00cc\u00cf")
         buf.write("\3\2\2\2\u00cd\u00cb\3\2\2\2\u00cd\u00ce\3\2\2\2\u00ce")
         buf.write("\61\3\2\2\2\u00cf\u00cd\3\2\2\2\u00d0\u00d1\7&\2\2\u00d1")
@@ -1883,27 +1883,27 @@ class LittleParser ( Parser ):
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
                     if la_ == 1:
-                        localctx = LittleParser.ProcessAddOpContext(self, LittleParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = LittleParser.ProcessMulOpContext(self, LittleParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 193
                         if not self.precpred(self._ctx, 7):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
                         self.state = 194
-                        self.addop()
+                        self.mulop()
                         self.state = 195
                         self.expr(8)
                         pass
 
                     elif la_ == 2:
-                        localctx = LittleParser.ProcessMulOpContext(self, LittleParser.ExprContext(self, _parentctx, _parentState))
+                        localctx = LittleParser.ProcessAddOpContext(self, LittleParser.ExprContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 197
                         if not self.precpred(self._ctx, 6):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
                         self.state = 198
-                        self.mulop()
+                        self.addop()
                         self.state = 199
                         self.expr(7)
                         pass

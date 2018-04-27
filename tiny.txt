@@ -1,0 +1,77 @@
+ADDI OP1 OP2 RESULT (Integer add; RESULT = OP1 + OP2)
+SUBI OP1 OP2 RESULT (Integer sub; RESULT = OP1 - OP2)
+MULTI OP1 OP2 RESULT (Integer mul; RESULT = OP1 * OP2)
+DIVI OP1 OP2 RESULT (Integer div; RESULT = OP1 / OP2)
+ADDF OP1 OP2 RESULT (Floating point add; RESULT = OP1 + OP2)
+SUBF OP1 OP2 RESULT (Floating point sub; RESULT = OP1 - OP2)
+MULTF OP1 OP2 RESULT (Floating point mul; RESULT = OP1 * OP2)
+DIVF OP1 OP2 RESULT (Floating point div; RESULT = OP1 / OP2)
+STOREI OP1 RESULT (Integer store; store OP1 in RESULT)
+STOREF OP1 RESULT (Floating point store; store OP1 in RESULT)
+READI RESULT (Read integer from console; store in RESULT)
+READF RESULT (Read float from console; store in RESULT)
+WRITEI OP1 (Write integer OP1 to console)
+WRITEF OP1 (Write float OP1 to console)
+WRITES OP1 (Write string OP1 to console)
+
+This task is fairly straightforward: iterate over the list of 3AC you generated in the previous
+step and convert each individual instruction into the necessary Tiny code (note that Tiny
+instructions reuse one of the source operands as the destination, so you may need to
+generate multiple Tiny instructions for each 3AC instruction).
+
+label target           ; a jump target
+move opmrl opmr        ; only one operand can be a memory id or stack variable
+addi opmrl reg         ; integer addition, reg = reg + op1
+addr opmrl reg         ; real (i.e. floatingpoint) addition
+subi opmrl reg         ; computes reg = reg - op1
+subr opmrl reg
+muli opmrl reg         ; computes reg = reg * op1
+mulr opmrl reg
+divi opmrl reg         ; computes reg = reg /  op1
+divr opmrl reg
+inci reg               ; increment the (integer) register value by 1
+deci reg               ; decrement the (integer) register value by 1
+cmpi opmrl reg         ; integer comparison; must preceed  a conditional jump;
+                         it compares the first operand with the second op and
+			 sets  the "processor status". (The status remains the
+			 same until the next cmp instruction is executed.)
+                         E.g, a subsequent jgt will jump if op1 > op2
+
+
+push opmrl             ; push a data item onto the stack. Operand can be
+                       ;   omitted, in which case an empty element is pushed.
+pop  opmr              ; pops an element from the stack. If the operand is
+                       ;   non-empty, the element is moved there
+jsr target             ; jump to target and push the current pc onto the stack
+ret                    ; pop an address from the stack and jump there
+link #                 ; push frame pointer (fp) onto stack, copy sp into fp,
+                       ;   push # empty cells onto stack
+unlnk                  ; copy fp into sp, pop fp from stack
+
+cmpr opmrl reg         ; real comparison
+jmp target             ; uncond itional jump
+jgt target             ; jump if (op1 of the preceeding cmp was) greater (than op2)
+jlt target             ; jump if less than
+jge target             ; jump if greater of equal
+jle target             ; jump if less or equal
+jeq target             ; jump if equal
+jne target             ; jump if not equal
+sys readi  opmr        ; system call for reading an integer from input
+sys readr  opmr        ; system call for reading a real value
+sys writei opmr        ; system call for outputting an integer
+sys writer opmr        ; system call for outputting an integer
+sys writes sid         ; system call for outputting a string constant
+sys halt               ; system call to end the execution
+end                    ; end of the assembly code (not an opcode)
+
+
+notation used for the operands:
+ id      stands for the name of a memory location
+ sid     stands for the name of a string constant
+ #       stands for an integer number
+ target  stands for the name of a jump target
+ $offset stands for a stack variable at address fp+offset
+ reg     stands for a  register, named r0,r1,r2, or r3, case insensitive
+ opmrl   stands for a memory id, stack variable, register or a number (literal),
+         the format for real is digit*[.digit*][E[+|-]digit*]
+ opmr    stands for a memory id, stack variable, or a register

@@ -1,13 +1,14 @@
 import os, sys
+from tempfile import NamedTemporaryFile
 from antlr4 import *
 from antlr4.error.ErrorListener import ErrorListener
 from LittleLexer import LittleLexer
 from LittleParser import LittleParser
 from LittleVisitorImpl import LittleVisitorImpl, LiteralType
-from ir import CodeObject
+from asm import AsmConverter
+from ir import CodeObject, RegisterContext
 from ir_builder import IRBuilder
 from optimizer import IROptimizer
-
 
 class CustomErrorListener(ErrorListener):
 
@@ -19,6 +20,24 @@ class CustomErrorListener(ErrorListener):
 
     def has_errors(self):
         return len(self.errors) > 0
+
+def run_tiny(code):
+    import subprocess
+
+    with NamedTemporaryFile(mode="w") as file:
+        for op in code:
+            file.write(op.value + os.linesep)
+
+        file.flush()
+
+        dirname = os.path.dirname(os.path.realpath(__file__))
+        cmd = ["{}/tinyvm/tiny".format(dirname), file.name]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stdin=sys.stdin)
+        while p.poll() is None:
+            l = p.stdout.readline().decode()
+            print(l)
+
+        print(p.stdout.read().decode())
 
 
 if __name__ == '__main__':
@@ -42,22 +61,22 @@ if __name__ == '__main__':
 
     # list of defined variables found within the program
     var_refs = visitor.var_refs
-    # get a list of string variables
-    str_refs = list(filter(lambda ref: var_refs[ref].type == LiteralType.STRING, var_refs.keys()))
-    # get a list of int/float variables
-    numeric_refs = list(filter(lambda ref: ref not in str_refs, var_refs.keys()))
 
     # create IR from program
-    ir = IRBuilder(prog)
-    code: CodeObject = ir.get_code()
+    context = RegisterContext()
+    ir = IRBuilder(prog, context)
+    code = ir.get_code() # type: CodeObject
 
     # perform any IR optimizations
     initial_len = len(code.ir_nodes)
     optimizer = IROptimizer(code.ir_nodes)
-    opt_code = optimizer.eval()
+    optimized_ir_code = optimizer.eval()
     # for node in opt_code:
     #     node.debug()
     # final_len = len(opt_code)
     # print("Optimization optimized by %.2f%%" % ((initial_len - final_len) / initial_len * 100))
 
     # final compilation step to convert IR -> assembly
+    converter = AsmConverter(optimized_ir_code, var_refs.values(), context)
+    code = converter.convert(debug=True, inline=False)
+    run_tiny(code)

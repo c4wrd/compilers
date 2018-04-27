@@ -2,20 +2,23 @@ PROGRAM p
 BEGIN
 
 	INT a,b,c;
+	STRING newline := "\n";
 
 	FUNCTION VOID main()
 	BEGIN
-		a := 20;
-		b := 30;
-		c := 40;
+		a := 2;
+		b := 3;
+		c := 4;
 
-		c := c + a*b + (a*b+c)/a + 20;
-		b := b*b + a;
-		a := (b*a)/a;
 
-		WRITE (c);
-		WRITE (b);
-		WRITE (a);
+		-- c := c + a*b + (a*b+c)/a + 20;
+		-- b := b*b + a;
+		-- a := (b*a)/a;
+		a := ((a + b) * (c + 10);
 
+
+		WRITE (a, newline);
+        -- WRITE (b, newline);
+        -- WRITE (c, newline);
 	END
 END

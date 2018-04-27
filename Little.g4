@@ -41,8 +41,8 @@ return_stmt : RETURN expr ';' ;
 // Expressions
 
 expr
-    : expr addop expr #processAddOp
-    | expr mulop expr #processMulOp
+    : expr mulop expr #processMulOp
+    | expr addop expr #processAddOp
     | IDENTIFIER #processIdentExpr
     | INTLITERAL #processIntExpr
     | FLOATLITERAL #processFloatExpr

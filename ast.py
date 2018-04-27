@@ -19,7 +19,7 @@ class ASTNode:
         for child in self.children:
             child.debug(level+1)
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         raise NotImplementedError()
 
 class Operators:
@@ -35,17 +35,18 @@ class LiteralType:
     NONE = "none"
 
 class Flags(IntEnum):
-    LVALUE = auto()
-    RVALUE = auto()
+    LVALUE = 1
+    RVALUE = 2
 
 class VarRefNode(ASTNode):
 
-    def __init__(self, var_name: str, type: LiteralType):
+    def __init__(self, var_name: str, type: LiteralType, str_value = None):
         super().__init__()
         self.var_name = var_name
         self.type = type
+        self.str_value = str_value
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
         object.result = self.var_name
         object.result_type = self.type
@@ -72,16 +73,16 @@ class AddExprNode(ExpressionNode):
         self.children.append(left)
         self.children.append(right)
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
 
         # get code for left and right children expressions
-        left_object: CodeObject = self.children[0].accept(context)
-        right_object: CodeObject = self.children[1].accept(context)
+        left_object = self.children[0].accept(context) # type: CodeObject
+        right_object = self.children[1].accept(context) # type: CodeObject
         # add child expressions
         object.add(left_object, right_object)
         # set result register
-        object.result = context.next_register()
+        object.result = context.next_temp()
         if left_object.result_type == LiteralType.INT:
             if self.operator == Operators.ADD:
                 object.add_op(ADDI(left_object.result, right_object.result, object.result))
@@ -106,16 +107,16 @@ class MulExprNode(ExpressionNode):
         self.children.append(left)
         self.children.append(right)
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
 
         # get code for left and right children expressions
-        left_object: CodeObject = self.children[0].accept(context)
-        right_object: CodeObject = self.children[1].accept(context)
+        left_object = self.children[0].accept(context) # type: CodeObject
+        right_object = self.children[1].accept(context) # type: CodeObject
         # add child expressions
         object.add(left_object, right_object)
         # set result register
-        object.result = context.next_register()
+        object.result = context.next_temp()
         if left_object.result_type == LiteralType.INT:
             if self.operator == Operators.MUL:
                 object.add_op(MULTI(left_object.result, right_object.result, object.result))
@@ -158,9 +159,9 @@ class LiteralNode(ExpressionNode):
     def as_float(self):
         return float(self.value)
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
-        object.result = context.next_register()
+        object.result = context.next_temp()
         if self.is_int():
             object.result_type = LiteralType.INT
             object.add_op(STOREI(self.as_int(), object.result))
@@ -182,7 +183,7 @@ class VarDeclarationNode(ASTNode):
 
 class ReadNode(ASTNode):
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
         for node in self.children: # typeof VarRefNode
             if node.type == LiteralType.INT:
@@ -193,7 +194,7 @@ class ReadNode(ASTNode):
 
 class WriteNode(ASTNode):
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
         for node in self.children:
             if node.type == LiteralType.INT:
@@ -211,9 +212,9 @@ class AssignmentNode(ASTNode):
         self.var_ref = var_ref
         self.children.append(value)
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
-        left_object: CodeObject = self.children[0].accept(context)
+        left_object = self.children[0].accept(context) # type: CodeObject
         object.add(left_object)
         object.result = self.var_ref.var_name
         if self.var_ref.type == LiteralType.INT:
@@ -231,7 +232,7 @@ class StatementListNode(ASTNode):
     def add_statement(self, statement: Union[VarDeclarationNode, AssignmentNode]):
         self.children.append(statement)
 
-    def accept(self, context: IRContext) -> CodeObject:
+    def accept(self, context: RegisterContext) -> CodeObject:
         object = CodeObject()
         object.result_type = LiteralType.NONE
         object.result = None

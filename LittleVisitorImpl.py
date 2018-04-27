@@ -22,7 +22,9 @@ class LittleVisitorImpl(LittleVisitor):
         return super().visitDecl(ctx)
 
     def visitString_decl(self, ctx: LittleParser.String_declContext):
-        node = LiteralNode(ctx.IDENTIFIER().getText(), LiteralType.STRING)
+        node = LiteralNode(ctx.STRINGLITERAL().getText(), LiteralType.STRING)
+        # add string declaration to variable references
+        self.var_refs[ctx.IDENTIFIER().getText()] = VarRefNode(ctx.IDENTIFIER().getText(), LiteralType.STRING, node.value)
         return node
 
     def visitVar_decl(self, ctx: LittleParser.Var_declContext) -> List[VarDeclarationNode]:

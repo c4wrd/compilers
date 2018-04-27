@@ -1,13 +1,17 @@
-from enum import Enum, auto
+from enum import Enum
 
-class IRContext:
+class RegisterContext:
 
     def __init__(self):
-        self.register_counter = 0
+        self.count = 0
 
-    def next_register(self):
-        self.register_counter += 1
-        return "$T%d" % self.register_counter
+    def next_temp(self):
+        self.count += 1
+        return "$T%d" % self.count
+
+    def next_reg(self):
+       self.count += 1
+       return "r%d" % self.count
 
 class CodeObject:
 
@@ -35,9 +39,9 @@ class CodeObject:
             node.debug()
 
 class ResultType(Enum):
-    INT = auto()
-    FLOAT = auto()
-    NONE = auto()
+    INT = 1
+    FLOAT = 2
+    NONE = 4
 
 class Ops:
     ADDI = "ADDI"
@@ -63,9 +67,12 @@ class IRNode:
         self.args = args
         self.result_type = result_type
 
-    def debug(self):
+    def __str__(self):
         args = ', '.join([str(arg) for arg in self.args])
-        print("%s %s \t %s" % (self.op, args, self.result_type))
+        return "%s %s \t %s" % (self.op, args, self.result_type)
+
+    def debug(self):
+        print(str(self))
 
 class ADDI(IRNode):
 
@@ -119,21 +126,21 @@ class STOREF(IRNode):
 
 class READI(IRNode):
     def __init__(self, result):
-        super().__init__("READI", (result), ResultType.INT)
+        super().__init__("READI", (result,), ResultType.INT)
 
 class READF(IRNode):
     def __init__(self, result):
-        super().__init__("READF", (result), ResultType.FLOAT)
+        super().__init__("READF", (result,), ResultType.FLOAT)
 
 class WRITEI(IRNode):
     def __init__(self, op1):
-        super().__init__("WRITEI", (op1), ResultType.NONE)
+        super().__init__("WRITEI", (op1,), ResultType.NONE)
 
 class WRITEF(IRNode):
     def __init__(self, op1):
-        super().__init__("WRITEF", (op1), ResultType.NONE)
+        super().__init__("WRITEF", (op1,), ResultType.NONE)
 
 class WRITES(IRNode):
     def __init__(self, op1):
-        super().__init__("WRITES", (op1), ResultType.NONE)
+        super().__init__("WRITES", (op1,), ResultType.NONE)
 
