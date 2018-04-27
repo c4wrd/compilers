@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a834f3a0-d778-4ddc-aef3-f46231a042b9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test_cases/5.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tiny.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tinyvm/run.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tinyvm/sample.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tinyvm/tiny.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compulers.iml" afterPath="$PROJECT_DIR$/.idea/compulers.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Driver.py" afterPath="$PROJECT_DIR$/Driver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Little.g4" afterPath="$PROJECT_DIR$/Little.g4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Little.interp" afterPath="$PROJECT_DIR$/Little.interp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LittleParser.py" afterPath="$PROJECT_DIR$/LittleParser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LittleVisitorImpl.py" afterPath="$PROJECT_DIR$/LittleVisitorImpl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asm.py" afterPath="$PROJECT_DIR$/asm.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ast.py" afterPath="$PROJECT_DIR$/ast.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ir.py" afterPath="$PROJECT_DIR$/ir.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ir_builder.py" afterPath="$PROJECT_DIR$/ir_builder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_cases/4.txt" afterPath="$PROJECT_DIR$/test_cases/4.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_cases/7.txt" afterPath="$PROJECT_DIR$/test_cases/7.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,11 +32,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="asm.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ast.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ast.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="76" column="12" lean-forward="true" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="asm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/asm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
-              <caret line="152" column="5" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+            <state relative-caret-position="781">
+              <caret line="153" column="0" lean-forward="true" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
               <folding>
                 <marker date="1524806050641" expanded="true" signature="1507:1551" ph="..." />
                 <marker date="1524806050641" expanded="true" signature="2791:2796" ph="..." />
@@ -63,16 +55,6 @@
                 <marker date="1524806050641" expanded="true" signature="4761:4766" ph="..." />
                 <marker date="1524806050641" expanded="true" signature="5993:6055" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ir.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ir.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
-              <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -87,11 +69,41 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="test.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_cases/test.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="7.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_cases/7.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
               <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="6.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_cases/6.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="948">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Little.g4" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Little.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="78" column="4" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -129,26 +141,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="5.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_cases/5.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="958">
-              <caret line="52" column="3" lean-forward="false" selection-start-line="52" selection-start-column="3" selection-end-line="52" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tinyvm/run.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -160,8 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ST</find>
-      <find>STOREI</find>
       <find>assignmentNode</find>
       <find>next_register</find>
       <find>.INT</find>
@@ -190,6 +180,8 @@
       <find>auto</find>
       <find>= auto</find>
       <find>addi</find>
+      <find>if_st</find>
+      <find>cond</find>
     </findStrings>
     <replaceStrings>
       <replace>IDENTIFIER</replace>
@@ -220,7 +212,6 @@
         <option value="$PROJECT_DIR$/tinyvm/tiny.c" />
         <option value="$PROJECT_DIR$/Little.g4" />
         <option value="$PROJECT_DIR$/tinyvm/run.sh" />
-        <option value="$PROJECT_DIR$/ast.py" />
         <option value="$PROJECT_DIR$/ir.py" />
         <option value="$PROJECT_DIR$/LittleVisitorImpl.py" />
         <option value="$PROJECT_DIR$/test_cases/5.txt" />
@@ -229,6 +220,7 @@
         <option value="$PROJECT_DIR$/tinyvm/sample.txt" />
         <option value="$PROJECT_DIR$/Driver.py" />
         <option value="$PROJECT_DIR$/asm.py" />
+        <option value="$PROJECT_DIR$/ast.py" />
       </list>
     </option>
   </component>
@@ -241,10 +233,10 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1920" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="502" />
     <option name="y" value="43" />
-    <option name="width" value="1920" />
+    <option name="width" value="3338" />
     <option name="height" value="2117" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -405,7 +397,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="43" width="3840" height="2117" extended-state="6" />
+    <frame x="502" y="43" width="3338" height="2117" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -413,9 +405,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993524" sideWeight="0.51572496" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32865623" sideWeight="0.47841153" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42039934" sideWeight="0.47867805" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14978679" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32865623" sideWeight="0.47841153" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42039934" sideWeight="0.47867805" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17292307" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30329195" sideWeight="0.4946695" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -697,14 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_cases/test.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Little.interp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -721,26 +705,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_cases/6.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1040">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tiny.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="880">
           <caret line="22" column="4" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Little.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="695">
-          <caret line="50" column="1" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="128" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -758,16 +726,6 @@
         <state relative-caret-position="120">
           <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ast.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3160">
-          <caret line="79" column="31" lean-forward="false" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#24#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -827,22 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_cases/4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_cases/7.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LittleVisitorImpl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -883,8 +825,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/asm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="152" column="5" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+        <state relative-caret-position="781">
+          <caret line="153" column="0" lean-forward="true" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
           <folding>
             <marker date="1524806050641" expanded="true" signature="1507:1551" ph="..." />
             <marker date="1524806050641" expanded="true" signature="2791:2796" ph="..." />
@@ -893,6 +835,54 @@
             <marker date="1524806050641" expanded="true" signature="4761:4766" ph="..." />
             <marker date="1524806050641" expanded="true" signature="5993:6055" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_cases/7.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_cases/6.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="948">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_cases/4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_cases/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Little.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="78" column="4" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ast.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="76" column="12" lean-forward="true" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>

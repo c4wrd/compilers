@@ -65,6 +65,17 @@ class ExpressionNode(ASTNode):
     def get_right(self):
         return self.children[1]
 
+class IfExprNode(ExpressionNode):
+
+    def __init__(self,
+                 if_lhs: ExpressionNode,
+                 if_rhs: ExpressionNode,
+                 if_compop: str,
+                 then_clause: ExpressionNode,
+                 else_clause: ExpressionNode):
+        super().__init__(Flags.RVALUE)
+        self
+
 class AddExprNode(ExpressionNode):
 
     def __init__(self, operator, left: ExpressionNode, right: ExpressionNode):
