@@ -1,41 +1,69 @@
-; STOREI 1, a 	 ResultType.INT
-; STOREI 2, b 	 ResultType.INT
-; READI c 	 ResultType.INT
-; READI d 	 ResultType.INT
-; MULTI a, c, $T3 	 ResultType.INT
-; MULTI b, d, $T4 	 ResultType.INT
-; ADDI $T3, $T4, $T5 	 ResultType.INT
-; STOREI $T5, e 	 ResultType.INT
-; WRITEI c 	 ResultType.NONE
-; WRITES newline 	 ResultType.NONE
-; WRITEI d 	 ResultType.NONE
-; WRITES newline 	 ResultType.NONE
-; WRITEI e 	 ResultType.NONE
-; WRITES newline 	 ResultType.NONE
+; Optimization optimized by 10.00%
 str newline "\n"
-var c
-var b
-var e
-var d
 var a
-move 1 a
-move 2 b
-sys readi c
-sys readi d
-move a r6
-muli c r6
-move r6 r3
-move b r7
-muli d r7
-move r7 r4
-addi r3 r8
-addi r4 r8
-move r8 r5
-move r5 e
-sys writei c
+var p
+var i
+var b
+; STOREI 0 i
+move 0 i
+; STOREI 0 a
+move 0 a
+; STOREI 0 b
+move 0 b
+; LABEL LOOP_1
+label LOOP_1
+; STOREI 10 $T4
+move 10 r4
+; NE i $T4 EXIT_2
+cmpi i r4
+jne EXIT_2
+; READI p
+sys readi p
+; STOREI 10 $T7
+move 10 r7
+; LE p $T7 ELSE_4
+cmpi p r7
+jle ELSE_4
+; STOREI 1 $T5
+move 1 r5
+; ADDI a $T5 $T6
+move a r12
+addi r5 r12
+move r12 r6
+; STOREI $T6 a
+move r6 a
+; JUMP EXIT_3
+jmp EXIT_3
+; LABEL ELSE_4
+label ELSE_4
+; STOREI 1 $T8
+move 1 r8
+; ADDI b $T8 $T9
+move b r13
+addi r8 r13
+move r13 r9
+; STOREI $T9 b
+move r9 b
+; LABEL EXIT_3
+label EXIT_3
+; STOREI 1 $T10
+move 1 r10
+; ADDI i $T10 $T11
+move i r14
+addi r10 r14
+move r14 r11
+; STOREI $T11 i
+move r11 i
+; JUMP LOOP_1
+jmp LOOP_1
+; LABEL EXIT_2
+label EXIT_2
+; WRITEI a
+sys writei a
+; WRITES newline
 sys writes newline
-sys writei d
-sys writes newline
-sys writei e
+; WRITEI b
+sys writei b
+; WRITES newline
 sys writes newline
 sys halt
