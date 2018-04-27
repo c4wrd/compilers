@@ -8,6 +8,11 @@ class ASTNode:
     def __init__ (self):
         self.children = []  # typeof ASTNode
 
+    def prop(self, item):
+        index = len(self.children)
+        self.children.append(item)
+        return property(lambda self: self.children[index])
+
     def add_child (self, node):
         self.children.append(node)
 
@@ -31,7 +36,7 @@ class Operators:
     DIV = "/"
 
 
-class LiteralType:
+class LiteralType(Enum):
     STRING = "string"
     INT = "integer"
     FLOAT = "float"
@@ -50,7 +55,7 @@ class StatementListNode(ASTNode):
         object.result_type = LiteralType.NONE
         object.result = None
         for statement in self.children:
-            object.add(statement.accept(context, ))
+            object.add(statement.accept(context))
         return object
 
 
@@ -91,17 +96,22 @@ class ConditionExprNode(ASTNode):
         self.compop = compop
 
     def accept(self, context: IdProviderContext, **kwargs):
+        object = CodeObject()
         jump_label = kwargs.pop("jump_label")
 
         lhs = self.lhs.accept(context)
         rhs = self.rhs.accept(context)
+        object.add(lhs)
+        object.add(rhs)
 
         # we may want to jump if a condition is not met, optionally provided
         # by the parent AST node
         if "negate" in kwargs and kwargs.get("negate") == True:
-            return get_negated_comp_node(self.compop, lhs.result, rhs.result, jump_label)
+            object.add(get_negated_comp_node(self.compop, lhs.result_type, lhs.result, rhs.result, jump_label))
         else:
-            return get_comp_node(self.compop, lhs.result, rhs.result, jump_label)
+            object.add(get_comp_node(self.compop, lhs.result_type, lhs.result, rhs.result, jump_label))
+
+        return object
 
 
 class IfExprNode(ASTNode):
@@ -157,7 +167,7 @@ class WhileStmtNode(ASTNode):
 
     def __init__ (self, condition: ConditionExprNode, statements: StatementListNode):
         super().__init__()
-        self.condition = condition
+        self.children.append(condition)
         self.children.append(statements)
 
     def accept (self, context: IdProviderContext, **kwargs):
@@ -176,6 +186,8 @@ class WhileStmtNode(ASTNode):
         object.add(while_body_ir)  # while body
         object.add(JUMP(loop_start_label))  # jump to beginning of loop
         object.add(LABEL(exit_label))  # exit label if condition not met
+
+        return object
 
 
 class AddExprNode(ExpressionNode):

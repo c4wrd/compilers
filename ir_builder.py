@@ -8,4 +8,4 @@ class IRBuilder:
         self.context = context
 
     def get_code(self):
-        return self.program.accept(self.context, )
+        return self.program.accept(self.context)

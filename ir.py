@@ -177,53 +177,53 @@ class JUMP(IRNode):
         super().__init__("JUMP", (label,), ResultType.NONE)
 
 class GT(IRNode):
-    def __init__(self, op1, op2, label):
-        super().__init__("GT", (op1, op2, label), ResultType.NONE)
+    def __init__(self, op1, op2, label, type: ResultType):
+        super().__init__("GT", (op1, op2, label), type)
 
 class GE(IRNode):
-    def __init__ (self, op1, op2, label):
-        super().__init__("GE", (op1, op2, label), ResultType.NONE)
+    def __init__ (self, op1, op2, label, type: ResultType):
+        super().__init__("GE", (op1, op2, label), type)
 
 class LT(IRNode):
-    def __init__ (self, op1, op2, label):
-        super().__init__("LT", (op1, op2, label), ResultType.NONE)
+    def __init__ (self, op1, op2, label, type: ResultType):
+        super().__init__("LT", (op1, op2, label), type)
 
 class LE(IRNode):
-    def __init__ (self, op1, op2, label):
-        super().__init__("LE", (op1, op2, label), ResultType.NONE)
+    def __init__ (self, op1, op2, label, type: ResultType):
+        super().__init__("LE", (op1, op2, label), type)
 
 class NE(IRNode):
-    def __init__ (self, op1, op2, label):
-        super().__init__("NE", (op1, op2, label), ResultType.NONE)
+    def __init__ (self, op1, op2, label, type: ResultType):
+        super().__init__("NE", (op1, op2, label), type)
 
 class EQ(IRNode):
-    def __init__(self, op1, op2, label):
-        super().__init__("EQ", (op1, op2, label), ResultType.NONE)
+    def __init__(self, op1, op2, label, type: ResultType):
+        super().__init__("EQ", (op1, op2, label), type)
 
-def get_comp_node(compop: str, op1, op2, label) -> IRNode:
+def get_comp_node(compop: str, type: ResultType, op1, op2, label) -> IRNode:
     if compop == ">":
-        return GT(op1, op2, label)
+        return GT(op1, op2, label, type)
     elif compop == ">=":
-        return GE(op1, op2, label)
+        return GE(op1, op2, label, type)
     elif compop == "<":
-        return LT(op1, op2, label)
+        return LT(op1, op2, label, type)
     elif compop == "<=":
-        return LE(op1, op2, label)
+        return LE(op1, op2, label, type)
     elif compop == "!=":
-        return NE(op1, op2, label)
+        return NE(op1, op2, label, type)
     elif compop == "==":
-        return EQ(op1, op2, label)
+        return EQ(op1, op2, label, type)
 
-def get_negated_comp_node(compop: str, op1, op2, label) -> IRNode:
+def get_negated_comp_node(compop: str, type: ResultType, op1, op2, label) -> IRNode:
     if compop == ">":
-        return LE(op1, op2, label)
+        return LE(op1, op2, label, type)
     elif compop == ">=":
-        return LT(op1, op2, label)
+        return LT(op1, op2, label, type)
     elif compop == "<":
-        return GE(op1, op2, label)
+        return GE(op1, op2, label, type)
     elif compop == "<=":
-        return GT(op1, op2, label)
+        return GT(op1, op2, label, type)
     elif compop == "!=":
-        return EQ(op1, op2, label)
+        return EQ(op1, op2, label, type)
     elif compop == "==":
-        return NE(op1, op2, label)
+        return NE(op1, op2, label, type)

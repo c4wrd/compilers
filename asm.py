@@ -181,35 +181,70 @@ def convert_WRITES(value: WRITES, context: IdProviderContext) -> List[AsmOp]:
     ]
 
 def convert_JUMP(value: JUMP, context: IdProviderContext) -> List[AsmOp]:
-    pass
-
+    label = getargs(value.args)
+    return [
+        make("jmp {}", label)
+    ]
 
 def convert_LABEL(value: LABEL, context: IdProviderContext) -> List[AsmOp]:
-    pass
+    label = getargs(value.args)
+    return [
+        make("label {}", label)
+    ]
 
 
 def convert_GT(value: GT, context: IdProviderContext) -> List[AsmOp]:
-    pass
+    op1, op2, label = getargs(value.args)
+    comparison_type = "cmpi" if value.result_type == ResultType.INT else "cmpr"
+    return [
+        make("{} {} {}", comparison_type, op1, op2),
+        make("jgt {}", label)
+    ]
 
 
 def convert_GE(value: GE, context: IdProviderContext) -> List[AsmOp]:
-    pass
+    op1, op2, label = getargs(value.args)
+    comparison_type = "cmpi" if value.result_type == ResultType.INT else "cmpr"
+    return [
+        make("{} {} {}", comparison_type, op1, op2),
+        make("jge {}", label)
+    ]
 
 
 def convert_LT(value: LT, context: IdProviderContext) -> List[AsmOp]:
-    pass
+    op1, op2, label = getargs(value.args)
+    comparison_type = "cmpi" if value.result_type == ResultType.INT else "cmpr"
+    return [
+        make("{} {} {}", comparison_type, op1, op2),
+        make("jlt {}", label)
+    ]
 
 
 def convert_LE(value: LE, context: IdProviderContext) -> List[AsmOp]:
-    pass
+    op1, op2, label = getargs(value.args)
+    comparison_type = "cmpi" if value.result_type == ResultType.INT else "cmpr"
+    return [
+        make("{} {} {}", comparison_type, op1, op2),
+        make("jle {}", label)
+    ]
 
 
 def convert_NE(value: NE, context: IdProviderContext) -> List[AsmOp]:
-    pass
+    op1, op2, label = getargs(value.args)
+    comparison_type = "cmpi" if value.result_type == ResultType.INT else "cmpr"
+    return [
+        make("{} {} {}", comparison_type, op1, op2),
+        make("jne {}", label)
+    ]
 
 
 def convert_EQ(value: EQ, context: IdProviderContext) -> List[AsmOp]:
-    pass
+    op1, op2, label = getargs(value.args)
+    comparison_type = "cmpi" if value.result_type == ResultType.INT else "cmpr"
+    return [
+        make("{} {} {}", comparison_type, op1, op2),
+        make("jeq {}", label)
+    ]
 
 
 """

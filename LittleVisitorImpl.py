@@ -192,7 +192,10 @@ class LittleVisitorImpl(LittleVisitor):
         return super().visitCompop(ctx)
 
     def visitWhile_stmt(self, ctx: LittleParser.While_stmtContext):
-        return super().visitWhile_stmt(ctx)
+        cond = self.visit(ctx.cond())
+        self.visit(ctx.decl())
+        stmt_list = self.visit(ctx.stmt_list())
+        return WhileStmtNode(cond, stmt_list)
 
     def aggregateResult(self, aggregate, nextResult):
         if aggregate == None:

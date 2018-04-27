@@ -11,7 +11,7 @@ BEGIN
         a := 1;
         b := 2;
 
-        IF ( a < b )
+        IF ( a < 100 )
             WRITE(bBIGGER);
         ELSE
             WRITE(aBIGGER);

@@ -32,7 +32,7 @@ def run_tiny(code):
 
         dirname = os.path.dirname(os.path.realpath(__file__))
         cmd = ["{}/tinyvm/tiny".format(dirname), file.name]
-        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stdin=sys.stdin)
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stdin=sys.stdin, stderr=sys.stderr)
         while p.poll() is None:
             l = p.stdout.readline().decode()
             print(l)
@@ -71,12 +71,12 @@ if __name__ == '__main__':
     initial_len = len(code.ir_nodes)
     optimizer = IROptimizer(code.ir_nodes)
     optimized_ir_code = optimizer.eval()
-    for node in optimized_ir_code:
-        node.debug()
+    # for node in optimized_ir_code:
+    #     node.debug()
     final_len = len(optimized_ir_code)
-    # print("Optimization optimized by %.2f%%" % ((initial_len - final_len) / initial_len * 100))
+    print("; Optimization optimized by %.2f%%" % ((initial_len - final_len) / initial_len * 100))
 
     # final compilation step to convert IR -> assembly
-    # converter = AsmConverter(optimized_ir_code, var_refs.values(), context)
-    # code = converter.convert(debug=True, inline=False)
-    # run_tiny(code)
+    converter = AsmConverter(optimized_ir_code, var_refs.values(), context)
+    code = converter.convert(debug=True, inline=False)
+    run_tiny(code)
