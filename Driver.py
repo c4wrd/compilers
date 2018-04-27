@@ -6,7 +6,7 @@ from LittleLexer import LittleLexer
 from LittleParser import LittleParser
 from LittleVisitorImpl import LittleVisitorImpl, LiteralType
 from asm import AsmConverter
-from ir import CodeObject, RegisterContext
+from ir import CodeObject, TemporaryContext
 from ir_builder import IRBuilder
 from optimizer import IROptimizer
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     var_refs = visitor.var_refs
 
     # create IR from program
-    context = RegisterContext()
+    context = TemporaryContext()
     ir = IRBuilder(prog, context)
     code = ir.get_code() # type: CodeObject
 

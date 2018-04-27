@@ -1,9 +1,9 @@
-from ir import RegisterContext
+from ir import TemporaryContext
 from ast import ASTNode
 
 class IRBuilder:
 
-    def __init__(self, program: ASTNode, context: RegisterContext):
+    def __init__(self, program: ASTNode, context: TemporaryContext):
         self.program = program
         self.context = context
 

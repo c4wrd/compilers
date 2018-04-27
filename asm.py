@@ -54,7 +54,7 @@ def handler(func: Callable):
     return anonymous_func
 
 
-def convert_ADDI(value: ADDI, context: RegisterContext) -> List[AsmOp]:
+def convert_ADDI(value: ADDI, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -63,7 +63,7 @@ def convert_ADDI(value: ADDI, context: RegisterContext) -> List[AsmOp]:
         make("move {} {}", temp_register, result)
     ]
 
-def convert_SUBI(value: SUBI, context: RegisterContext) -> List[AsmOp]:
+def convert_SUBI(value: SUBI, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -73,7 +73,7 @@ def convert_SUBI(value: SUBI, context: RegisterContext) -> List[AsmOp]:
     ]
 
 
-def convert_MULTI(value: MULTI, context: RegisterContext) -> List[AsmOp]:
+def convert_MULTI(value: MULTI, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -82,7 +82,7 @@ def convert_MULTI(value: MULTI, context: RegisterContext) -> List[AsmOp]:
         make("move {} {}", temp_register, result)
     ]
 
-def convert_DIVI(value: DIVI, context: RegisterContext) -> List[AsmOp]:
+def convert_DIVI(value: DIVI, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -92,7 +92,7 @@ def convert_DIVI(value: DIVI, context: RegisterContext) -> List[AsmOp]:
     ]
 
 
-def convert_ADDF(value: ADDF, context: RegisterContext) -> List[AsmOp]:
+def convert_ADDF(value: ADDF, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -102,7 +102,7 @@ def convert_ADDF(value: ADDF, context: RegisterContext) -> List[AsmOp]:
     ]
 
 
-def convert_SUBF(value: SUBF, context: RegisterContext) -> List[AsmOp]:
+def convert_SUBF(value: SUBF, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -112,7 +112,7 @@ def convert_SUBF(value: SUBF, context: RegisterContext) -> List[AsmOp]:
     ]
 
 
-def convert_MULTF(value: MULTF, context: RegisterContext) -> List[AsmOp]:
+def convert_MULTF(value: MULTF, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -122,7 +122,7 @@ def convert_MULTF(value: MULTF, context: RegisterContext) -> List[AsmOp]:
     ]
 
 
-def convert_DIVF(value: DIVF, context: RegisterContext) -> List[AsmOp]:
+def convert_DIVF(value: DIVF, context: TemporaryContext) -> List[AsmOp]:
     op1, op2, result = getargs(value.args)
     temp_register = context.next_reg()
     return [
@@ -132,49 +132,49 @@ def convert_DIVF(value: DIVF, context: RegisterContext) -> List[AsmOp]:
     ]
 
 
-def convert_STOREI(value: STOREI, context: RegisterContext) -> List[AsmOp]:
+def convert_STOREI(value: STOREI, context: TemporaryContext) -> List[AsmOp]:
     op1, result = getargs(value.args)
     return [
         make("move {} {}", op1, result)
     ]
 
 
-def convert_STOREF(value: STOREF, context: RegisterContext) -> List[AsmOp]:
+def convert_STOREF(value: STOREF, context: TemporaryContext) -> List[AsmOp]:
     op1, result = getargs(value.args)
     return [
         make("move {} {}", op1, result)
     ]
 
 
-def convert_READI(value: READI, context: RegisterContext) -> List[AsmOp]:
+def convert_READI(value: READI, context: TemporaryContext) -> List[AsmOp]:
     result = getargs(value.args)
     return [
         make("sys readi {}", result)
     ]
 
 
-def convert_READF(value: READF, context: RegisterContext) -> List[AsmOp]:
+def convert_READF(value: READF, context: TemporaryContext) -> List[AsmOp]:
     result = getargs(value.args)
     return [
         make("sys readr {}", result)
     ]
 
 
-def convert_WRITEI(value: WRITEI, context: RegisterContext) -> List[AsmOp]:
+def convert_WRITEI(value: WRITEI, context: TemporaryContext) -> List[AsmOp]:
     op1 = getargs(value.args)
     return [
         make("sys writei {}", op1)
     ]
 
 
-def convert_WRITEF(value: WRITEF, context: RegisterContext) -> List[AsmOp]:
+def convert_WRITEF(value: WRITEF, context: TemporaryContext) -> List[AsmOp]:
     op1 = getargs(value.args)
     return [
         make("sys writer {}", op1)
     ]
 
 
-def convert_WRITES(value: WRITES, context: RegisterContext) -> List[AsmOp]:
+def convert_WRITES(value: WRITES, context: TemporaryContext) -> List[AsmOp]:
     op1 = getargs(value.args)
     return [
         make("sys writes {}", op1)
@@ -205,7 +205,7 @@ CONVERSIONS = {
 
 
 class AsmConverter:
-    def __init__(self, code: List[IRNode], variables: List[VarRefNode], context: RegisterContext):
+    def __init__(self, code: List[IRNode], variables: List[VarRefNode], context: TemporaryContext):
         self.ir_ops = code
         self.variables = variables
         self.context = context

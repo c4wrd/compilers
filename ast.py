@@ -19,7 +19,7 @@ class ASTNode:
         for child in self.children:
             child.debug(level+1)
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         raise NotImplementedError()
 
 class Operators:
@@ -46,7 +46,7 @@ class VarRefNode(ASTNode):
         self.type = type
         self.str_value = str_value
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
         object.result = self.var_name
         object.result_type = self.type
@@ -65,16 +65,29 @@ class ExpressionNode(ASTNode):
     def get_right(self):
         return self.children[1]
 
+class ConditionExprNode(ExpressionNode):
+
+    def __init__(self, compop: str, left: ExpressionNode, right: ExpressionNode):
+        super().__init__(Flags.RVALUE)
+        self.lhs = left
+        self.rhs = right
+        self.compop = compop
+
 class IfExprNode(ExpressionNode):
 
     def __init__(self,
-                 if_lhs: ExpressionNode,
-                 if_rhs: ExpressionNode,
-                 if_compop: str,
+                 cond: ConditionExprNode,
                  then_clause: ExpressionNode,
                  else_clause: ExpressionNode):
         super().__init__(Flags.RVALUE)
-        self
+        self.children.append(cond)
+        self.children.append(then_clause)
+        self.children.append(else_clause)
+
+    def accept(self, context: TemporaryContext) -> CodeObject:
+        object = CodeObject()
+
+
 
 class AddExprNode(ExpressionNode):
 
@@ -84,7 +97,7 @@ class AddExprNode(ExpressionNode):
         self.children.append(left)
         self.children.append(right)
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
 
         # get code for left and right children expressions
@@ -118,7 +131,7 @@ class MulExprNode(ExpressionNode):
         self.children.append(left)
         self.children.append(right)
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
 
         # get code for left and right children expressions
@@ -170,7 +183,7 @@ class LiteralNode(ExpressionNode):
     def as_float(self):
         return float(self.value)
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
         object.result = context.next_temp()
         if self.is_int():
@@ -194,7 +207,7 @@ class VarDeclarationNode(ASTNode):
 
 class ReadNode(ASTNode):
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
         for node in self.children: # typeof VarRefNode
             if node.type == LiteralType.INT:
@@ -205,7 +218,7 @@ class ReadNode(ASTNode):
 
 class WriteNode(ASTNode):
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
         for node in self.children:
             if node.type == LiteralType.INT:
@@ -223,7 +236,7 @@ class AssignmentNode(ASTNode):
         self.var_ref = var_ref
         self.children.append(value)
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
         left_object = self.children[0].accept(context) # type: CodeObject
         object.add(left_object)
@@ -243,7 +256,7 @@ class StatementListNode(ASTNode):
     def add_statement(self, statement: Union[VarDeclarationNode, AssignmentNode]):
         self.children.append(statement)
 
-    def accept(self, context: RegisterContext) -> CodeObject:
+    def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
         object.result_type = LiteralType.NONE
         object.result = None

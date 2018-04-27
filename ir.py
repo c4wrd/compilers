@@ -1,9 +1,10 @@
 from enum import Enum
 
-class RegisterContext:
+class TemporaryContext:
 
     def __init__(self):
         self.count = 0
+        self.label_count = 0
 
     def next_temp(self):
         self.count += 1
@@ -12,6 +13,18 @@ class RegisterContext:
     def next_reg(self):
        self.count += 1
        return "r%d" % self.count
+
+    def next_exit(self):
+        self.label_count += 1
+        return "EXIT_%d" % self.label_count
+
+    def next_else(self):
+        self.label_count += 1
+        return "ELSE_%d" % self.label_count
+
+    def next_loop(self):
+        self.label_count += 1
+        return "LOOP_%d" % self.label_count
 
 class CodeObject:
 
@@ -144,3 +157,48 @@ class WRITES(IRNode):
     def __init__(self, op1):
         super().__init__("WRITES", (op1,), ResultType.NONE)
 
+class LABEL(IRNode):
+    def __init__(self, label):
+        super().__init__("LABEL", (label,), ResultType.NONE)
+
+class JUMP(IRNode):
+    def __init__(self, label):
+        super().__init__("JUMP", (label,), ResultType.NONE)
+
+class GT(IRNode):
+    def __init__(self, op1, op2, label):
+        super().__init__("GT", (op1, op2, label), ResultType.NONE)
+
+class GE(IRNode):
+    def __init__ (self, op1, op2, label):
+        super().__init__("GE", (op1, op2, label), ResultType.NONE)
+
+class LT(IRNode):
+    def __init__ (self, op1, op2, label):
+        super().__init__("LT", (op1, op2, label), ResultType.NONE)
+
+class LE(IRNode):
+    def __init__ (self, op1, op2, label):
+        super().__init__("LE", (op1, op2, label), ResultType.NONE)
+
+class NE(IRNode):
+    def __init__ (self, op1, op2, label):
+        super().__init__("NE", (op1, op2, label), ResultType.NONE)
+
+class EQ(IRNode):
+    def __init__(self, op1, op2, label):
+        super().__init__("EQ", (op1, op2, label), ResultType.NONE)
+
+def get_comp_node(compop: str, op1, op2, label) -> IRNode:
+    if str == ">":
+        return GT(op1, op2, label)
+    elif str == ">=":
+        return GE(op1, op2, label)
+    elif str == "<":
+        return LT(op1, op2, label)
+    elif str == "<=":
+        return LE(op1, op2, label)
+    elif str == "!=":
+        return NE(op1, op2, label)
+    elif str == "==":
+        return EQ(op1, op2, label)
