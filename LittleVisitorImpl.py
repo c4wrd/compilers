@@ -164,13 +164,31 @@ class LittleVisitorImpl(LittleVisitor):
         return ctx.getText()
 
     def visitIf_stmt(self, ctx: LittleParser.If_stmtContext):
-        return super().visitIf_stmt(ctx)
 
-    def visitElse_part(self, ctx: LittleParser.Else_partContext):
-        return super().visitElse_part(ctx)
+        # visit declarations
+        self.visit(ctx.decl())
+
+        # build if ast node
+        condExpr = self.visit(ctx.cond()) # type: ConditionExprNode
+        then_stmt_list = self.visit(ctx.stmt_list()) # type: StatementListNode
+        else_stmt_list = self.visit(ctx.else_part()) # type: StatementListNode
+
+        return IfExprNode(condExpr, then_stmt_list, else_stmt_list)
+
+
+
+    def visitElse_part(self, ctx: LittleParser.Else_partContext) -> Union[StatementListNode, None]:
+        if ctx.ELSE() is not None:
+            self.visit(ctx.decl())
+            return self.visit(ctx.stmt_list())
+        else:
+            return None
 
     def visitCond(self, ctx: LittleParser.CondContext):
-        return super().visitCond(ctx)
+        lhs = self.visit(ctx.expr(0)) # type: ExpressionNode
+        rhs = self.visit(ctx.expr(1)) # type: ExpressionNode
+        compop = ctx.compop().getText()
+        return ConditionExprNode(compop, lhs, rhs)
 
     def visitCompop(self, ctx: LittleParser.CompopContext):
         return super().visitCompop(ctx)

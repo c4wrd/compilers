@@ -38,6 +38,16 @@ class Flags(IntEnum):
     LVALUE = 1
     RVALUE = 2
 
+class StatementListNode(ASTNode):
+
+    def accept(self, context: TemporaryContext) -> CodeObject:
+        object = CodeObject()
+        object.result_type = LiteralType.NONE
+        object.result = None
+        for statement in self.children:
+            object.add(statement.accept(context))
+        return object
+
 class VarRefNode(ASTNode):
 
     def __init__(self, var_name: str, type: LiteralType, str_value = None):
@@ -77,15 +87,16 @@ class IfExprNode(ExpressionNode):
 
     def __init__(self,
                  cond: ConditionExprNode,
-                 then_clause: ExpressionNode,
-                 else_clause: ExpressionNode):
+                 then_stmts: StatementListNode,
+                 else_stmts: StatementListNode):
         super().__init__(Flags.RVALUE)
         self.children.append(cond)
-        self.children.append(then_clause)
-        self.children.append(else_clause)
+        self.children.append(then_stmts)
+        self.children.append(else_stmts)
 
     def accept(self, context: TemporaryContext) -> CodeObject:
         object = CodeObject()
+        # TODO
 
 
 
@@ -249,18 +260,5 @@ class AssignmentNode(ASTNode):
             object.add_op(STOREI(left_object.result, object.result))
         else:
             object.add_op(STOREF(left_object.result, object.result))
-        return object
-
-class StatementListNode(ASTNode):
-
-    def add_statement(self, statement: Union[VarDeclarationNode, AssignmentNode]):
-        self.children.append(statement)
-
-    def accept(self, context: TemporaryContext) -> CodeObject:
-        object = CodeObject()
-        object.result_type = LiteralType.NONE
-        object.result = None
-        for statement in self.children:
-            object.add(statement.accept(context))
         return object
 
